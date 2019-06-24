@@ -5,4 +5,5 @@
 After Clone git :
 <li>Step 1. Composer update</li>
 <li>Step 2. Composer install</li>
+<li>Step 2. Composer install</li>
 
