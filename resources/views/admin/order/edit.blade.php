@@ -293,6 +293,10 @@
         if (!order_date) {
             $('#invoice_date').datepicker('setDate', new Date());
         }
+
+        $( "#invoice_number" ).keypress(function(event) {
+            return validateNumber(event);
+        });
     </script>
 @stop
 
