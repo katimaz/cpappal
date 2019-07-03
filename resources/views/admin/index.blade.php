@@ -239,7 +239,7 @@
                                             <option value="Apr" {{Carbon\Carbon::now()->format('M') == 'Apr' ? 'selected':''}}>Apr</option>
                                             <option value="May" {{Carbon\Carbon::now()->format('M') == 'May' ? 'selected':''}}>May</option>
                                             <option value="Jun" {{Carbon\Carbon::now()->format('M') == 'Jun' ? 'selected':''}}>Jun</option>
-                                            <option value="July" {{Carbon\Carbon::now()->format('M') == 'July' ? 'selected':''}}>July</option>
+                                            <option value="Jul" {{Carbon\Carbon::now()->format('M') == 'Jul' ? 'selected':''}}>July</option>
                                             <option value="Aug" {{Carbon\Carbon::now()->format('M') == 'Aug' ? 'selected':''}}>Aug</option>
                                             <option value="Sep" {{Carbon\Carbon::now()->format('M') == 'Sep' ? 'selected':''}}>Sep</option>
                                             <option value="Oct" {{Carbon\Carbon::now()->format('M') == 'Oct' ? 'selected':''}}>Oct</option>
