@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TemplateOrder;
+use App\OrderType;
 use App\TemplateOrderProduct;
 use App\TemplateOrderSubProduct;
 use Illuminate\Http\Request;
@@ -43,8 +44,9 @@ class TemplateController extends Controller
             ->get();
         $customers = Customer::all();
         $countries = Country::all();
+        $order_types = OrderType::all();
 
-        return view('admin.template.add',compact('customers','products','countries'));
+        return view('admin.template.add',compact('customers','products','countries','order_types'));
     }
 
     public function create(Request $request)
@@ -52,6 +54,7 @@ class TemplateController extends Controller
         $order = new TemplateOrder();
         $order->template_name = $request->template_name;
         $order->template_remark = $request->template_remark;
+        $order->order_type = $request->invoice_type;
         $order->customer_id = $request->customer_id;
         $order->customer_country_name = $request->customer_country_name;
         $order->customer_name = $request->customer_name;
@@ -99,6 +102,7 @@ class TemplateController extends Controller
     {
         $customers = Customer::all();
         $countries = Country::all();
+        $order_types = OrderType::all();
 
         $products = DB::table('products')
             ->join('categories','products.category_id','categories.id')
@@ -132,7 +136,7 @@ class TemplateController extends Controller
             ->whereIn('template_order_sub_products.order_product_id',$orderProductsIdArray)
             ->select('template_order_sub_products.*','categories.name as category_name')
             ->get();
-        return view('admin.template.edit',compact('orders','customers','products','orderSubProducts','countries'));
+        return view('admin.template.edit',compact('orders','customers','products','orderSubProducts','countries','order_types'));
     }
 
     public function update(Request $request)
@@ -140,6 +144,7 @@ class TemplateController extends Controller
         $order = TemplateOrder::find($request->order_id);
         $order->template_name = $request->template_name;
         $order->template_remark = $request->template_remark;
+        $order->order_type = $request->invoice_type;
         $order->customer_id = $request->customer_id;
         $order->customer_country_name = $request->customer_country_name;
         $order->customer_name = $request->customer_name;

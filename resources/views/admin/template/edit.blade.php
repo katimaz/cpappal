@@ -285,6 +285,19 @@
                     <label for="template_remark" class="input-label">Template Remark</label>
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-sm-12 mb-3 mb-sm-0">
+                    <select id="invoice-type-select" class="selectpicker show-tick form-control" data-size="5" data-style="droplist-style" title="Choose one of the invoice type..." name="invoice_type">
+                        @foreach($order_types as $order_type)
+                            @if($orders[0]->order_type == $order_type->value)
+                                <option value="{{$order_type->value}}" selected>{{$order_type->name}}</option>
+                            @else
+                                <option value="{{$order_type->value}}">{{$order_type->name}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <br/>
 
             <h1 class="h4 mb-2 text-gray-600">Customer</h1>
