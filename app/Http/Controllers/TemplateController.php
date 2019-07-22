@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\TemplateOrder;
 use App\OrderType;
 use App\TemplateOrderProduct;
@@ -45,8 +46,9 @@ class TemplateController extends Controller
         $customers = Customer::all();
         $countries = Country::all();
         $order_types = OrderType::all();
+        $categories = Category::all();
 
-        return view('admin.template.add',compact('customers','products','countries','order_types'));
+        return view('admin.template.add',compact('customers','products','countries','order_types','categories'));
     }
 
     public function create(Request $request)
@@ -103,10 +105,11 @@ class TemplateController extends Controller
         $customers = Customer::all();
         $countries = Country::all();
         $order_types = OrderType::all();
+        $categories = Category::all();
 
         $products = DB::table('products')
             ->join('categories','products.category_id','categories.id')
-            ->select('products.*','categories.name as category_name')
+            ->select('products.*','categories.name as category_name','products.category_id as product_category_id')
             ->orderBy('categories.priority','asc')
             ->get();
 
@@ -115,7 +118,7 @@ class TemplateController extends Controller
             ->join('products','products.id','template_order_products.product_id')
             ->join('categories','categories.id','products.category_id')
             ->where('template_orders.id',$id)
-            ->select('template_orders.id as ordersid' ,'template_orders.*','template_order_products.id as order_productsid', 'template_order_products.*','categories.name as category_name')
+            ->select('template_orders.id as ordersid' ,'template_orders.*','template_order_products.id as order_productsid', 'template_order_products.*','categories.name as category_name','products.category_id as product_category_id')
             ->orderBy('categories.priority','asc')
             ->get();
 
@@ -134,9 +137,9 @@ class TemplateController extends Controller
             ->join('products','products.id','template_order_sub_products.sub_product_id')
             ->join('categories','categories.id','products.category_id')
             ->whereIn('template_order_sub_products.order_product_id',$orderProductsIdArray)
-            ->select('template_order_sub_products.*','categories.name as category_name')
+            ->select('template_order_sub_products.*','categories.name as category_name','products.category_id as sub_product_category_id')
             ->get();
-        return view('admin.template.edit',compact('orders','customers','products','orderSubProducts','countries','order_types'));
+        return view('admin.template.edit',compact('orders','customers','products','orderSubProducts','countries','order_types','categories'));
     }
 
     public function update(Request $request)

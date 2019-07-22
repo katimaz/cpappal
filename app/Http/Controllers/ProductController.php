@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use App\Product;
 use DB;
+use Response;
 
 class ProductController extends Controller
 {
@@ -63,6 +64,18 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function getProductByCategoryId($id)
+    {
+        $products = DB::table('products')
+            ->join('categories','products.category_id','categories.id')
+            ->select('products.*','categories.name as category_name')
+            ->where('products.category_id','=',$id)
+            ->get();
+
+        return Response::json(array('success'=>true,'result'=>$products));
+    }
+
 
     /**
      * Display the specified resource.

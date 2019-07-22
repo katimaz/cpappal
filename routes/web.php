@@ -42,6 +42,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/product/edit/{id}', 'ProductController@edit')->name('product.edit');
     Route::post('/product/update', 'ProductController@update')->name('product.update');
     Route::post('/product/destroy', 'ProductController@destroy')->name('product.destroy');
+    Route::get('/product/category/{id}', 'ProductController@getProductByCategoryId')->name('product.getProductByCategoryId');
 
     Route::get('/order', 'OrderController@index')->name('order');
     Route::get('/order/add', 'OrderController@add')->name('order.add');

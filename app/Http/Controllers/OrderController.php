@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Customer;
 use App\OrderProduct;
 use App\OrderSubProduct;
@@ -43,17 +44,16 @@ class OrderController extends Controller
             ->select('products.*','categories.name as category_name')
             ->orderBy('categories.priority','asc')
             ->get();
+
         $customers = Customer::all();
-
         $order_types = OrderType::all();
-
         $countries = Country::all();
-
         $currencies = Currency::all();
+        $categories = Category::all();
 
         $max_order_no = DB::table('orders')->max('order_no');
 
-        return view('admin.order.add',compact('customers','products','order_types','max_order_no','countries','currencies'));
+        return view('admin.order.add',compact('customers','products','order_types','max_order_no','countries','currencies','categories'));
     }
 
     public function create(Request $request)
@@ -114,6 +114,7 @@ class OrderController extends Controller
         $customers = Customer::all();
         $countries = Country::all();
         $currencies = Currency::all();
+        $categories = Category::all();
 
         $products = DB::table('products')
             ->join('categories','products.category_id','categories.id')
@@ -125,7 +126,7 @@ class OrderController extends Controller
             ->join('products','products.id','order_products.product_id')
             ->join('categories','categories.id','products.category_id')
             ->where('orders.id',$id)
-            ->select('orders.id as ordersid' ,'orders.*','order_products.id as order_productsid', 'order_products.*','categories.name as category_name')
+            ->select('orders.id as ordersid' ,'orders.*','order_products.id as order_productsid', 'order_products.*','categories.name as category_name','products.category_id as product_category_id')
             ->orderBy('categories.priority','asc')
             ->get();
 
@@ -144,13 +145,13 @@ class OrderController extends Controller
             ->join('products','products.id','order_sub_products.sub_product_id')
             ->join('categories','categories.id','products.category_id')
             ->whereIn('order_sub_products.order_product_id',$orderProductsIdArray)
-            ->select('order_sub_products.*','categories.name as category_name')
+            ->select('order_sub_products.*','categories.name as category_name','products.category_id as sub_product_category_id')
             ->orderBy('categories.priority','asc')
             ->get();
 
         $order_types = OrderType::all();
 
-        return view('admin.order.edit',compact('orders','customers','products','orderSubProducts','order_types','countries','currencies'));
+        return view('admin.order.edit',compact('orders','customers','products','orderSubProducts','order_types','countries','currencies','categories'));
     }
 
     /**
