@@ -292,7 +292,7 @@ class OrderController extends Controller
             ->join('products','products.id','template_order_sub_products.sub_product_id')
             ->join('categories','categories.id','products.category_id')
             ->whereIn('template_order_sub_products.order_product_id',$orderProductsIdArray)
-            ->select('template_order_sub_products.*','categories.name as category_name','products.category_id as product_category_id')
+            ->select('template_order_sub_products.*','categories.name as category_name','products.category_id as sub_product_category_id')
             ->get();
 
         $order_types = OrderType::all();

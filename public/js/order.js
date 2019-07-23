@@ -75,7 +75,8 @@ $(document).on('change', '.sub-product-select', function (e) {
         input_element.val($(this).find("option:selected").attr(input_element.attr("name").substr(4, input_element.attr("name").length - 6)));
         if (k == 3) {
             input_element.val(0);
-            $(this).closest('div.form-group').next("div").find("div.form-group").first().next("div").find("div.col-5").next().find('input').first().val($(this).find("option:selected").attr(input_element.attr("name").substr(4, input_element.attr("name").length - 6)));
+            //$(this).closest('div.form-group').next("div").find("div.form-group").first().next("div").find("div.col-5").next().find('input').first().val($(this).find("option:selected").attr(input_element.attr("name").substr(4, input_element.attr("name").length - 6)));//
+            $(this).closest('div.form-group').next("div").find("div.form-group").first().next("div").find("div.col-5").next().find('input').first().val(0);
             $('#sum_total_price').text('$ ' + sum_price());
             $('#order_total_price').val(sum_price());
         }
