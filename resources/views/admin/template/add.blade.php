@@ -116,7 +116,7 @@
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <select id="category-select" class="category-select select selectpicker show-tick form-control" data-size="5" data-style="droplist-style" data-live-search="true" data-show-subtext="true" required>
-                        <option value="" selected disabled hidden>Choose one of the Category...</option>
+                        <option value="" selected disabled hidden>Choose one of the category...</option>
                         @foreach($categories as $category)
                             <option category_id="{{$category->id}}" value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
