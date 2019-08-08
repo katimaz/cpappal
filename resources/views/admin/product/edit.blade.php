@@ -165,9 +165,20 @@
                 Edit
             </button>
         </form>
-        <br/>
-        <div class="container">
-            <table class="dataTable table table-striped" id="dataTable"></table>
+        </br>
+        <div class="row">
+            <div class="col-1 col-sm-12 col-md- col-lg-1">
+                <div class="row">
+                    <div class="col-12"></div>
+                    <div class="col-12"></div>
+                    <div class="col-12"></div>
+                </div>
+            </div>
+            <div class="col-11 col-sm-12 col-md-11 col-lg-11">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable"></table>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
