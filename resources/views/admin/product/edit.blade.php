@@ -49,19 +49,9 @@
             var id = pathArray[pathArray.length-1];
             var dataSet = [];
 
+            dataSet = getDetails(id);
             getProductDetails(id);
 
-            $.ajax({
-                url: "/admin/product/getDetails",
-                type:"get",
-                async: false,
-                data:{
-                    id:id,
-                },
-                success: function(result){
-                    dataSet = result['data'];
-                }
-            });
 
             var columnDefs = [{
                 title: "Product Id",
@@ -108,6 +98,21 @@
             });
         });
 
+        function getDetails(id){
+            var data;
+            $.ajax({
+                url: "/admin/product/getDetails",
+                type:"get",
+                async: false,
+                data:{
+                    id:id,
+                },
+                success: function(result){
+                    data = result['data'];
+                }
+            });
+            return data;
+        }
         function getProductDetails(id){
             $.ajax({
                 url: "/admin/product/getProductDetails",
@@ -119,7 +124,7 @@
                     $("#total_purchase_quantity").val(0);
                     $("#total_purchase_price").val(0);
                     $("#average_price").val(0);
-                    
+
                     if(result['data'][0]['purchase_quantity'] != null){
                         $("#total_purchase_quantity").val(result['data'][0]['purchase_quantity']);
                     }
