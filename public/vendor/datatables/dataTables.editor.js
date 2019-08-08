@@ -394,7 +394,7 @@
            var adata = dt.rows({
                selected: true
            });
-           var product_id = adata.data()[0][0];
+           var id = adata.data()[0][0];
 
            $.ajax({
                headers: {
@@ -403,10 +403,11 @@
                url: "/admin/product/deleteDetails",
                type:"POST",
                data:{
-                   id:product_id,
+                   id:id,
                },
                success: function(result){
-                   getProductDetails(product_id);
+                   getProductDetails(id);
+
                    $('#altEditor-modal .modal-body .alert').remove();
 
                    var message = '<div class="alert alert-success" role="alert">\
