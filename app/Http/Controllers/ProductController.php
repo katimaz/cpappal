@@ -156,11 +156,10 @@ class ProductController extends Controller
     public function getProductDetails(Request $request){
 
         $productDetails = DB::table('product_details')
-            ->select('product_id', DB::raw('SUM(purchase_price) as purchase_price'),
+            ->select(DB::raw('SUM(purchase_price) as purchase_price'),
                 DB::raw('SUM(purchase_quantity) as purchase_quantity'),
                 DB::raw('ROUND((SUM(purchase_price)/SUM(purchase_quantity)),2) as average')
             )
-            ->groupBy('product_id')
             ->where('product_details.product_id',$request->id)
             ->get();
 

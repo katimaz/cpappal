@@ -116,9 +116,18 @@
                     id:id,
                 },
                 success: function(result){
-                    $("#total_purchase_quantity").val(result['data'][0]['purchase_quantity']);
-                    $("#total_purchase_price").val(result['data'][0]['purchase_price']);
-                    $("#average_price").val(result['data'][0]['average']);
+                    $("#total_purchase_quantity").val(0);
+                    $("#total_purchase_price").val(0);
+                    $("#average_price").val(0);
+                    if(result['data'][0]['purchase_quantity'] != null){
+                        $("#total_purchase_quantity").val(result['data'][0]['purchase_quantity']);
+                    }
+                    if(result['data'][0]['purchase_price'] != null){
+                        $("#total_purchase_price").val(result['data'][0]['purchase_price']);
+                    }
+                    if(result['data'][0]['average'] != null){
+                        $("#average_price").val(result['data'][0]['average']);
+                    }
                 }
             });
         }

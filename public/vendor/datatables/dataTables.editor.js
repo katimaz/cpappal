@@ -351,7 +351,7 @@
                 id: dt.context[0].aoColumns[i].id
             })
          }
-         console.log(columnDefs);
+         // console.log(columnDefs);
 
            var adata = dt.rows({
             selected: true
