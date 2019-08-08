@@ -119,7 +119,7 @@
                     $("#total_purchase_quantity").val(0);
                     $("#total_purchase_price").val(0);
                     $("#average_price").val(0);
-                    console.log(result['data'][0]['purchase_quantity']);
+                    
                     if(result['data'][0]['purchase_quantity'] != null){
                         $("#total_purchase_quantity").val(result['data'][0]['purchase_quantity']);
                     }
