@@ -394,7 +394,9 @@
            var adata = dt.rows({
                selected: true
            });
-           var id = adata.data()[0][0];
+           var product_id = adata.data()[0][0];
+           var pathArray = window.location.pathname.split('/');
+           var id = pathArray[pathArray.length-1];
 
            $.ajax({
                headers: {
@@ -403,7 +405,7 @@
                url: "/admin/product/deleteDetails",
                type:"POST",
                data:{
-                   id:id,
+                   id:product_id
                },
                success: function(result){
                    getProductDetails(id);
