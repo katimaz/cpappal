@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Product;
+use App\ProductDetails;
 use DB;
 use Response;
+use Arr;
 
 class ProductController extends Controller
 {
@@ -138,5 +140,56 @@ class ProductController extends Controller
     {
         Product::destroy($request->id);
         return redirect()->route('product');
+    }
+
+    public function addDetails(Request $request)
+    {
+        $productDetails = new ProductDetails();
+        $productDetails->product_id = $request->id;
+        $productDetails->purchase_date = $request->data[1];
+        $productDetails->purchase_name = $request->data[2];
+        $productDetails->purchase_price = $request->data[3];
+        $productDetails->purchase_quantity = $request->data[4];
+        $productDetails->save();
+
+        return Response::json(array('success'=>true));
+    }
+
+    public function getDetails(Request $request)
+    {
+        $productDetails = DB::table('product_details')
+            ->where('product_id','=',$request->id)
+            ->get();
+
+        $productDetailsArray = [];
+        for ($i = 0 ; $i<count($productDetails);$i++) {
+            $temp = [];
+            array_push($temp,$productDetails[$i]->id);
+            array_push($temp,$productDetails[$i]->purchase_date);
+            array_push($temp,$productDetails[$i]->purchase_name);
+            array_push($temp,$productDetails[$i]->purchase_price);
+            array_push($temp,$productDetails[$i]->purchase_quantity);
+            array_push($productDetailsArray,$temp);
+        }
+
+        return Response::json(array('success'=>true,'data'=>$productDetailsArray));
+    }
+
+    public function deleteDetails(Request $request)
+    {
+        ProductDetails::destroy($request->id);
+        return Response::json(array('success'=>true));
+    }
+
+    public function editDetails(Request $request)
+    {
+        $productDetails = ProductDetails::find($request->data[0]);
+        $productDetails->purchase_date = $request->data[1];
+        $productDetails->purchase_name = $request->data[2];
+        $productDetails->purchase_price = $request->data[3];
+        $productDetails->purchase_quantity = $request->data[4];
+        $productDetails->save();
+
+        return Response::json(array('success'=>true));
     }
 }

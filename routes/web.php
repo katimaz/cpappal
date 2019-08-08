@@ -44,6 +44,11 @@ Route::prefix('admin')->group(function () {
     Route::post('/product/destroy', 'ProductController@destroy')->name('product.destroy');
     Route::get('/product/category/{id}', 'ProductController@getProductByCategoryId')->name('product.getProductByCategoryId');
 
+    Route::post('/product/addDetails', 'ProductController@addDetails')->name('product.addDetails');
+    Route::get('/product/getDetails', 'ProductController@getDetails')->name('product.getDetails');
+    Route::post('/product/editDetails', 'ProductController@editDetails')->name('product.editDetails');
+    Route::post('/product/deleteDetails', 'ProductController@deleteDetails')->name('product.deleteDetails');
+
     Route::get('/order', 'OrderController@index')->name('order');
     Route::get('/order/add', 'OrderController@add')->name('order.add');
     Route::post('/order/create', 'OrderController@create')->name('order.create');

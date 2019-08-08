@@ -266,7 +266,11 @@
           data += "<form name='altEditor-form' role='form'>";
 
           for (var j in columnDefs) {
-            data += "<div class='form-group row'><div class='col-12'><input type='text'  id='" + columnDefs[j].id + "' name='" + columnDefs[j].id + "' placeholder='" + columnDefs[j].title + "' class='input-material form-control' value='" + adata.data()[0][j] + "'><label for='" + columnDefs[j].id + "' class='input-label'>" + columnDefs[j].title + ":</label></div></div>";
+              if(j==0){
+                  data += "<div class='form-group row' style='display: none;'><div class='col-12'><input type='text'  id='" + columnDefs[j].id + "' name='" + columnDefs[j].id + "' placeholder='" + columnDefs[j].title + "' class='input-material form-control' value='" + adata.data()[0][j] + "'><label for='" + columnDefs[j].id + "' class='input-label'>" + columnDefs[j].title + ":</label></div></div>";
+              }else{
+                  data += "<div class='form-group row'><div class='col-12'><input type='text'  id='" + columnDefs[j].id + "' name='" + columnDefs[j].id + "' placeholder='" + columnDefs[j].title + "' class='input-material form-control' value='" + adata.data()[0][j] + "'><label for='" + columnDefs[j].id + "' class='input-label'>" + columnDefs[j].title + ":</label></div></div>";
+              }
           }
           data += "</form>";
 
@@ -293,24 +297,35 @@
 
          var data = [];
 
-         $('form[name="altEditor-form"] input').each(function( i )
-         {
-            data.push( $(this).val() );
-         });        
+         $('form[name="altEditor-form"] input').each(function( i ) {
+            data.push($(this).val());
+         });
 
-         $('#altEditor-modal .modal-body .alert').remove();
+           $.ajax({
+               headers: {
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               },
+               url: "/admin/product/editDetails",
+               type:"POST",
+               data:{
+                   data:data
+               },
+               success: function(result){
+                   $('#altEditor-modal .modal-body .alert').remove();
 
-         var message = '<div class="alert alert-success" role="alert">\
-             <strong>Success!</strong> This record has been updated.\
-           </div>';
+                   var message = '<div class="alert alert-success" role="alert">\
+                    <strong>Success!</strong> This record has been updated.\
+                    </div>';
 
-           $('#altEditor-modal .modal-body').append(message);
+                   $('#altEditor-modal .modal-body').append(message);
 
-           dt.row({ selected:true }).data(data);
+                   dt.row({ selected:true }).data(data);
 
-           setTimeout(function () {
-               $("#altEditor-modal").modal('toggle')
-           }, _timeout);
+                   setTimeout(function () {
+                       $("#altEditor-modal").modal('toggle')
+                   }, _timeout);
+               }
+           });
        },
 
 
@@ -326,7 +341,7 @@
 
          var columnDefs = [];
 
-         for( var i = 0; i < dt.context[0].aoColumns.length; i++ )
+         for( var i = 1; i < dt.context[0].aoColumns.length; i++ )
          {
             columnDefs.push({ title: dt.context[0].aoColumns[i].sTitle,
                 id: dt.context[0].aoColumns[i].id
@@ -337,7 +352,7 @@
             selected: true
           });
 
-          var data = "";
+         var data = "";
 
           data += "<form name='altEditor-form' role='form'>";
           for (var j in columnDefs) {
@@ -366,22 +381,38 @@
          var that = this;
          var dt = this.s.dt;
 
-         $('#altEditor-modal .modal-body .alert').remove();
+           var adata = dt.rows({
+               selected: true
+           });
+           var product_id = adata.data()[0][0];
 
-         var message = '<div class="alert alert-success" role="alert">\
-           <strong>Success!</strong> This record has been deleted.\
-         </div>';
+           $.ajax({
+               headers: {
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               },
+               url: "/admin/product/deleteDetails",
+               type:"POST",
+               data:{
+                   id:product_id,
+               },
+               success: function(result){
+                   $('#altEditor-modal .modal-body .alert').remove();
 
-         $('#altEditor-modal .modal-body').append(message);
-         
-         dt.row({ selected:true }).remove();
+                   var message = '<div class="alert alert-success" role="alert">\
+                    <strong>Success!</strong> This record has been deleted.\
+                    </div>';
 
-         dt.draw();
+                   $('#altEditor-modal .modal-body').append(message);
 
-         setTimeout(function () {
-             $("#altEditor-modal").modal('toggle')
-         }, _timeout);
+                   dt.row({ selected:true }).remove();
 
+                   dt.draw();
+
+                   setTimeout(function () {
+                       $("#altEditor-modal").modal('toggle')
+                   }, _timeout);
+               }
+           });
        },
 
 
@@ -409,7 +440,11 @@
           data += "<form name='altEditor-form' role='form'>";
 
           for (var j in columnDefs) {
-            data += "<div class='form-group row'><div class='col-12'><input type='text'  id='" + columnDefs[j].id + "' name='" + columnDefs[j].id + "' placeholder='" + columnDefs[j].title + "' class='input-material form-control' value=''><label for='" + columnDefs[j].id + "' class='input-label'>" + columnDefs[j].title + ":</label></div></div>";
+              if(j==0){
+                  data += "<div class='form-group row' style='display: none'><div class='col-12'><input type='text'  id='" + columnDefs[j].id + "' name='" + columnDefs[j].id + "' placeholder='" + columnDefs[j].title + "' class='input-material form-control' value=''><label for='" + columnDefs[j].id + "' class='input-label'>" + columnDefs[j].title + ":</label></div></div>";
+              }else{
+                  data += "<div class='form-group row'><div class='col-12'><input type='text'  id='" + columnDefs[j].id + "' name='" + columnDefs[j].id + "' placeholder='" + columnDefs[j].title + "' class='input-material form-control' value=''><label for='" + columnDefs[j].id + "' class='input-label'>" + columnDefs[j].title + ":</label></div></div>";
+              }
           }
           data += "</form>";
 
@@ -438,21 +473,35 @@
 
          $('form[name="altEditor-form"] input').each(function( i ) {
             data.push( $(this).val() );
-         });     
+         });
+           var pathArray = window.location.pathname.split('/');
 
-         $('#altEditor-modal .modal-body .alert').remove();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/admin/product/addDetails",
+                type:"POST",
+                data:{
+                    id:pathArray[pathArray.length-1],
+                    data:data
+                },
+            success: function(result){
+                $('#altEditor-modal .modal-body .alert').remove();
 
-         var message = '<div class="alert alert-success" role="alert">\
-           <strong>Success!</strong> This record has been added.\
-         </div>';
+                var message = '<div class="alert alert-success" role="alert">\
+                <strong>Success!</strong> This record has been added.\
+                </div>';
 
-         $('#altEditor-modal .modal-body').append(message);
+                $('#altEditor-modal .modal-body').append(message);
 
-         dt.row.add(data).draw(false);
+                dt.row.add(data).draw(false);
 
-         setTimeout(function () {
-             $("#altEditor-modal").modal('toggle')
-         }, _timeout);
+                setTimeout(function () {
+                    $("#altEditor-modal").modal('toggle')
+                }, _timeout);
+            }
+        });
        },
 
        _getExecutionLocationFolder: function() {
