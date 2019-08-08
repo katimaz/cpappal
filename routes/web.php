@@ -48,6 +48,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/product/getDetails', 'ProductController@getDetails')->name('product.getDetails');
     Route::post('/product/editDetails', 'ProductController@editDetails')->name('product.editDetails');
     Route::post('/product/deleteDetails', 'ProductController@deleteDetails')->name('product.deleteDetails');
+    Route::get('/product/getProductDetails', 'ProductController@getProductDetails')->name('product.getProductDetails');
 
     Route::get('/order', 'OrderController@index')->name('order');
     Route::get('/order/add', 'OrderController@add')->name('order.add');

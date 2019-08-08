@@ -297,7 +297,10 @@
 
          var data = [];
 
-         $('form[name="altEditor-form"] input').each(function( i ) {
+        var pathArray = window.location.pathname.split('/');
+        var id = pathArray[pathArray.length-1];
+
+           $('form[name="altEditor-form"] input').each(function( i ) {
             data.push($(this).val());
          });
 
@@ -311,6 +314,7 @@
                    data:data
                },
                success: function(result){
+                   getProductDetails(id);
                    $('#altEditor-modal .modal-body .alert').remove();
 
                    var message = '<div class="alert alert-success" role="alert">\
@@ -341,12 +345,13 @@
 
          var columnDefs = [];
 
-         for( var i = 1; i < dt.context[0].aoColumns.length; i++ )
+         for( var i = 0; i < dt.context[0].aoColumns.length; i++ )
          {
             columnDefs.push({ title: dt.context[0].aoColumns[i].sTitle,
                 id: dt.context[0].aoColumns[i].id
             })
          }
+         console.log(columnDefs);
 
            var adata = dt.rows({
             selected: true
@@ -356,7 +361,12 @@
 
           data += "<form name='altEditor-form' role='form'>";
           for (var j in columnDefs) {
-            data += "<div class='form-group row'><div class='col-12'><input type='text'  id='" + columnDefs[j].id + "' name='" + columnDefs[j].id + "' placeholder='" + columnDefs[j].title + "' class='input-material form-control' value='" + adata.data()[0][j] + "'><label for='" + columnDefs[j].id + "' class='input-label'>" + columnDefs[j].title + ":</label></div></div>";
+              if(j==0){
+                  data += "<div class='form-group row' style='display: none'><div class='col-12'><input type='text'  id='" + columnDefs[j].id + "' name='" + columnDefs[j].id + "' placeholder='" + columnDefs[j].title + "' class='input-material form-control' value='" + adata.data()[0][j] + "'><label for='" + columnDefs[j].id + "' class='input-label'>" + columnDefs[j].title + ":</label></div></div>";
+              }else{
+                  data += "<div class='form-group row'><div class='col-12'><input type='text'  id='" + columnDefs[j].id + "' name='" + columnDefs[j].id + "' placeholder='" + columnDefs[j].title + "' class='input-material form-control' value='" + adata.data()[0][j] + "'><label for='" + columnDefs[j].id + "' class='input-label'>" + columnDefs[j].title + ":</label></div></div>";
+              }
+
           }
           data += "</form>";
 
@@ -396,6 +406,7 @@
                    id:product_id,
                },
                success: function(result){
+                   getProductDetails(product_id);
                    $('#altEditor-modal .modal-body .alert').remove();
 
                    var message = '<div class="alert alert-success" role="alert">\
@@ -448,7 +459,7 @@
           }
           data += "</form>";
 
-          $('#altEditor-modal').on('show.bs.modal', function() {
+            $('#altEditor-modal').on('show.bs.modal', function() {
             $('#altEditor-modal').find('.modal-title').html('Add Record');
             $('#altEditor-modal').find('.modal-body').html('' + data + '');
             $('#altEditor-modal').find('.modal-footer').html("<button type='button' data-content='remove' class='btn btn-default' data-dismiss='modal'>Close</button>\
@@ -475,7 +486,7 @@
             data.push( $(this).val() );
          });
            var pathArray = window.location.pathname.split('/');
-
+           var id = pathArray[pathArray.length-1];
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -483,10 +494,11 @@
                 url: "/admin/product/addDetails",
                 type:"POST",
                 data:{
-                    id:pathArray[pathArray.length-1],
+                    id:id,
                     data:data
                 },
             success: function(result){
+                getProductDetails(id);
                 $('#altEditor-modal .modal-body .alert').remove();
 
                 var message = '<div class="alert alert-success" role="alert">\

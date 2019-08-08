@@ -21,6 +21,14 @@
 
     div.datepicker-container { z-index: 1100 !important; }
 
+    .form-control[readonly]{
+        background-color:rgba(0, 0, 0, 0);
+    }
+
+    .readonly-label{
+        border-bottom:0px
+    }
+
 </style>
 @stop
 
@@ -38,14 +46,17 @@
         $(document).ready(function(){
 
             var pathArray = window.location.pathname.split('/');
+            var id = pathArray[pathArray.length-1];
             var dataSet = [];
+
+            getProductDetails(id);
 
             $.ajax({
                 url: "/admin/product/getDetails",
                 type:"get",
                 async: false,
                 data:{
-                    id:pathArray[pathArray.length-1],
+                    id:id,
                 },
                 success: function(result){
                     dataSet = result['data'];
@@ -97,7 +108,22 @@
             });
         });
 
+        function getProductDetails(id){
+            $.ajax({
+                url: "/admin/product/getProductDetails",
+                type:"get",
+                data:{
+                    id:id,
+                },
+                success: function(result){
+                    $("#total_purchase_quantity").val(result['data'][0]['purchase_quantity']);
+                    $("#total_purchase_price").val(result['data'][0]['purchase_price']);
+                    $("#average_price").val(result['data'][0]['average']);
+                }
+            });
+        }
     </script>
+
 @stop
 
 @section('content')
@@ -167,14 +193,33 @@
         </form>
         </br>
         <div class="row">
-            <div class="col-1 col-sm-12 col-md- col-lg-1">
+            <div class="col-2 col-sm-12 col-md-2 col-lg-2">
                 <div class="row">
-                    <div class="col-12"></div>
-                    <div class="col-12"></div>
-                    <div class="col-12"></div>
+                    <div class="col-12" style="margin-bottom: 20px;">
+                        <input type="text" class="input-material form-control readonly-label" id="total_purchase_price" value="0" readonly>
+                        <label class="input-label">Total Purchase Price</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" style="margin-bottom: 20px;">
+                        <input type="text" class="input-material form-control readonly-label" id="total_purchase_quantity" value="0" readonly>
+                        <label class="input-label">Total Purchase Quantity</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" style="margin-bottom: 20px;">
+                        <input type="text" class="input-material form-control readonly-label" id="average_price" value="0" readonly>
+                        <label class="input-label">Average Price</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" style="margin-bottom: 20px;">
+                        <input type="text" class="input-material form-control readonly-label" id="remaining_quantity" value="0" readonly>
+                        <label class="input-label">Remaining Quantity</label>
+                    </div>
                 </div>
             </div>
-            <div class="col-11 col-sm-12 col-md-11 col-lg-11">
+            <div class="col-10 col-sm-12 col-md-10 col-lg-10">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable"></table>
                 </div>

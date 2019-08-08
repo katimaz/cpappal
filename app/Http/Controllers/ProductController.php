@@ -105,6 +105,17 @@ class ProductController extends Controller
             ->where('products.id',$id)
             ->select('products.*','categories.name as category_name')
             ->first();
+
+        $productDetails = DB::table('product_details')
+            ->select('product_id', DB::raw('SUM(purchase_price) as purchase_price'),
+                DB::raw('SUM(purchase_quantity) as purchase_quantity'),
+                DB::raw('ROUND((SUM(purchase_quantity)/SUM(purchase_price)),2) as average')
+            )
+            ->groupBy('product_id')
+            ->where('product_details.product_id',$product->id)
+            ->get();
+
+
         return view('admin.product.edit',compact('product','categories'))->with('success', true)->with('message','Product updated successfully!');
     }
 
@@ -142,6 +153,19 @@ class ProductController extends Controller
         return redirect()->route('product');
     }
 
+    public function getProductDetails(Request $request){
+
+        $productDetails = DB::table('product_details')
+            ->select('product_id', DB::raw('SUM(purchase_price) as purchase_price'),
+                DB::raw('SUM(purchase_quantity) as purchase_quantity'),
+                DB::raw('ROUND((SUM(purchase_price)/SUM(purchase_quantity)),2) as average')
+            )
+            ->groupBy('product_id')
+            ->where('product_details.product_id',$request->id)
+            ->get();
+
+        return Response::json(array('success'=>true,'data'=>$productDetails));
+    }
     public function addDetails(Request $request)
     {
         $productDetails = new ProductDetails();
