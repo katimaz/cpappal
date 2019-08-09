@@ -488,6 +488,7 @@
          $('form[name="altEditor-form"] input').each(function( i ) {
             data.push( $(this).val() );
          });
+
            var pathArray = window.location.pathname.split('/');
            var id = pathArray[pathArray.length-1];
             $.ajax({
@@ -501,6 +502,7 @@
                     data:data
                 },
             success: function(result){
+                data[0] = result['data'];
                 getProductDetails(id);
                 $('#altEditor-modal .modal-body .alert').remove();
 

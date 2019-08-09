@@ -175,7 +175,7 @@ class ProductController extends Controller
         $productDetails->purchase_quantity = $request->data[4];
         $productDetails->save();
 
-        return Response::json(array('success'=>true));
+        return Response::json(array('success'=>true,'data'=>$productDetails->id));
     }
 
     public function getDetails(Request $request)
