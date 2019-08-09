@@ -352,5 +352,11 @@ class UsersTableSeeder extends Seeder
             ]
         ]);
 
+        DB::table('roles')->insert([
+            ['name' => 'admin'],
+            ['name' => 'operator'],
+            ['name' => 'sales'],
+        ]);
+
     }
 }
