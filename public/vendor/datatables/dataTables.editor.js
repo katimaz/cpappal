@@ -49,9 +49,8 @@
    'use strict';
    var DataTable = $.fn.dataTable;
 
-
    var _instance = 0;
-   var _timeout = 1000;
+   var _timeout = 600;
    var _pathArray = window.location.pathname.split('/');
    var _id = _pathArray[_pathArray.length-1];
 
