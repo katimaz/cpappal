@@ -91,6 +91,13 @@ Route::prefix('admin')->group(function () {
     Route::post('/ordertype/update', 'OrderTypeController@update')->name('ordertype.update');
     Route::post('/ordertype/destroy', 'OrderTypeController@destroy')->name('ordertype.destroy');
 
+    Route::get('/user', 'UserController@index')->name('user');
+    Route::get('/user/add', 'UserController@add')->name('user.add');
+    Route::post('/user/create', 'UserController@create')->name('user.create');
+    Route::get('/user/edit/{id}', 'UserController@edit')->name('user.edit');
+    Route::post('/user/update', 'UserController@update')->name('user.update');
+    Route::post('/user/destroy', 'UserController@destroy')->name('user.destroy');
+
     Route::get('getdata','AdminController@getdata')->name('getData');
     Route::get('getmonthdata','AdminController@getMonthdata')->name('getMonthData');
 
