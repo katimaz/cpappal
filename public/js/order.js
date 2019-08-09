@@ -320,4 +320,8 @@ function validateNumber(event) {
     } else {
         return true;
     }
-};
+}
+
+function currencyFormat(n, currency,decimal) {
+    return currency + n.toFixed(decimal ).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+}

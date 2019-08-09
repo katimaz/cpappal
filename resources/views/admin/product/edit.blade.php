@@ -43,6 +43,7 @@
     <script src="{{ asset('vendor/datatables/dataTables.editor.js')}}" defer></script>
     <script src="{{ asset('vendor/datepicker/datepicker.min.js')}}" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="{{ asset('js/order.js')}}"></script>
 
     <script>
         var editor; // use a global for the submit and return data rendering in the examples
@@ -133,10 +134,10 @@
                         $("#total_purchase_quantity").val(result['data'][0]['purchase_quantity']);
                     }
                     if(result['data'][0]['purchase_price'] != null){
-                        $("#total_purchase_price").val(result['data'][0]['purchase_price']);
+                        $("#total_purchase_price").val(currencyFormat(result['data'][0]['purchase_price'],'$',2));
                     }
                     if(result['data'][0]['average'] != null){
-                        $("#average_price").val(result['data'][0]['average']);
+                        $("#average_price").val(currencyFormat(result['data'][0]['average'],'$',3));
                     }
                     if(result['data'][1]['product_quantity'] != null){
                         $("#remaining_quantity").val(result['data'][0]['purchase_quantity']-result['data'][1]['product_quantity']);
