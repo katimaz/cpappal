@@ -158,10 +158,17 @@ class ProductController extends Controller
         $productDetails = DB::table('product_details')
             ->select(DB::raw('SUM(purchase_price) as purchase_price'),
                 DB::raw('SUM(purchase_quantity) as purchase_quantity'),
-                DB::raw('ROUND((SUM(purchase_price)/SUM(purchase_quantity)),2) as average')
+                DB::raw('ROUND((SUM(purchase_price)/SUM(purchase_quantity)),3) as average')
             )
             ->where('product_details.product_id',$request->id)
             ->get();
+
+        $totalSoldProducts= DB::table('order_products')
+            ->select(DB::raw('SUM(product_quantity) as product_quantity'))
+            ->where('order_products.product_id','=',$request->id)
+            ->get();
+
+        $productDetails = $productDetails->concat($totalSoldProducts);
 
         return Response::json(array('success'=>true,'data'=>$productDetails));
     }

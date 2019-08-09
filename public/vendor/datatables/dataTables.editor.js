@@ -52,6 +52,8 @@
 
    var _instance = 0;
    var _timeout = 1000;
+   var _pathArray = window.location.pathname.split('/');
+   var _id = _pathArray[_pathArray.length-1];
 
    /** 
     * altEditor provides modal editing of records for Datatables
@@ -263,7 +265,7 @@
 
           var data = "";
 
-          data += "<form name='altEditor-form' role='form'>";
+          data += "<form id='altEditor-form' name='altEditor-form' role='form'>";
 
           for (var j in columnDefs) {
               if(j==0){
@@ -297,9 +299,6 @@
 
          var data = [];
 
-        var pathArray = window.location.pathname.split('/');
-        var id = pathArray[pathArray.length-1];
-
            $('form[name="altEditor-form"] input').each(function( i ) {
             data.push($(this).val());
          });
@@ -314,7 +313,7 @@
                    data:data
                },
                success: function(result){
-                   getProductDetails(id);
+                   getProductDetails(_id);
                    $('#altEditor-modal .modal-body .alert').remove();
 
                    var message = '<div class="alert alert-success" role="alert">\
@@ -359,7 +358,7 @@
 
          var data = "";
 
-          data += "<form name='altEditor-form' role='form'>";
+          data += "<form id='altEditor-form' name='altEditor-form' role='form'>";
           for (var j in columnDefs) {
               if(j==0){
                   data += "<div class='form-group row' style='display: none'><div class='col-12'><input type='text'  id='" + columnDefs[j].id + "' name='" + columnDefs[j].id + "' placeholder='" + columnDefs[j].title + "' class='input-material form-control' value='" + adata.data()[0][j] + "'><label for='" + columnDefs[j].id + "' class='input-label'>" + columnDefs[j].title + ":</label></div></div>";
@@ -395,8 +394,6 @@
                selected: true
            });
            var product_id = adata.data()[0][0];
-           var pathArray = window.location.pathname.split('/');
-           var id = pathArray[pathArray.length-1];
 
            $.ajax({
                headers: {
@@ -408,7 +405,7 @@
                    id:product_id
                },
                success: function(result){
-                   getProductDetails(id);
+                   getProductDetails(_id);
 
                    $('#altEditor-modal .modal-body .alert').remove();
 
@@ -451,7 +448,7 @@
          }
           var data = "";
 
-          data += "<form name='altEditor-form' role='form'>";
+          data += "<form id='altEditor-form' name='altEditor-form' role='form'>";
 
           for (var j in columnDefs) {
               if(j==0){
@@ -475,50 +472,70 @@
           $('#purchase_date').datepicker({
               format: 'yyyy-mm-dd'
           });
+
+           $( "#purchase_price , #purchase_quantity" ).keypress(function(event) {
+               return validateNumber(event);
+           });
+
+           $('#altEditor-form').validate({
+               rules: {
+                   purchase_date: {
+                       required: true,
+                   },
+                   company_name: {
+                       required: true,
+                   },
+                   purchase_price: {
+                       required: true,
+                   },
+                   purchase_quantity: {
+                       required: true,
+                   },
+               },errorPlacement: function(error, element) { }
+           });
        },
 
        _addRowData: function()
        {
-        //console.log('add row')
-         var that = this;
-         var dt = this.s.dt;
+           if ($('#altEditor-form').valid()) {
+               var that = this;
+               var dt = this.s.dt;
 
-         var data = [];
+               var data = [];
 
-         $('form[name="altEditor-form"] input').each(function( i ) {
-            data.push( $(this).val() );
-         });
+               $('form[name="altEditor-form"] input').each(function( i ) {
+                   data.push( $(this).val() );
+               });
 
-           var pathArray = window.location.pathname.split('/');
-           var id = pathArray[pathArray.length-1];
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: "/admin/product/addDetails",
-                type:"POST",
-                data:{
-                    id:id,
-                    data:data
-                },
-            success: function(result){
-                data[0] = result['data'];
-                getProductDetails(id);
-                $('#altEditor-modal .modal-body .alert').remove();
+               $.ajax({
+                   headers: {
+                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                   },
+                   url: "/admin/product/addDetails",
+                   type:"post",
+                   data:{
+                       id:_id,
+                       data:data
+                   },
+                   success: function(result){
+                       data[0] = result['data'];
+                       getProductDetails(_id);
+                       $('#altEditor-modal .modal-body .alert').remove();
 
-                var message = '<div class="alert alert-success" role="alert">\
+                       var message = '<div class="alert alert-success" role="alert">\
                 <strong>Success!</strong> This record has been added.\
                 </div>';
 
-                $('#altEditor-modal .modal-body').append(message);
+                       $('#altEditor-modal .modal-body').append(message);
 
-                dt.row.add(data).draw(false);
+                       dt.row.add(data).draw(false);
 
-                setTimeout(function () {
-                    $("#altEditor-modal").modal('toggle')
-                }, _timeout);
-            }
-        });
+                       setTimeout(function () {
+                           $("#altEditor-modal").modal('toggle')
+                       }, _timeout);
+                   }
+               });
+           }
        },
 
        _getExecutionLocationFolder: function() {

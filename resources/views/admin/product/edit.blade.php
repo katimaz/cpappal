@@ -29,6 +29,9 @@
         border-bottom:0px
     }
 
+    .error {
+        border-color: red !important;
+    }
 </style>
 @stop
 
@@ -39,6 +42,7 @@
     <script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js" defer></script>
     <script src="{{ asset('vendor/datatables/dataTables.editor.js')}}" defer></script>
     <script src="{{ asset('vendor/datepicker/datepicker.min.js')}}" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 
     <script>
         var editor; // use a global for the submit and return data rendering in the examples
@@ -47,11 +51,10 @@
 
             var pathArray = window.location.pathname.split('/');
             var id = pathArray[pathArray.length-1];
-            var dataSet = [];
+            var dataSet;
 
             dataSet = getDetails(id);
             getProductDetails(id);
-
 
             var columnDefs = [{
                 title: "Product Id",
@@ -64,10 +67,10 @@
                 id: "company_name"
             }, {
                 title: "Price",
-                id: "price"
+                id: "purchase_price"
             }, {
                 title: "Quantity",
-                id: "quantity"
+                id: "purchase_quantity"
             }];
 
             $('#dataTable').DataTable({
@@ -124,6 +127,7 @@
                     $("#total_purchase_quantity").val(0);
                     $("#total_purchase_price").val(0);
                     $("#average_price").val(0);
+                    $("#remaining_quantity").val(0);
 
                     if(result['data'][0]['purchase_quantity'] != null){
                         $("#total_purchase_quantity").val(result['data'][0]['purchase_quantity']);
@@ -134,11 +138,13 @@
                     if(result['data'][0]['average'] != null){
                         $("#average_price").val(result['data'][0]['average']);
                     }
+                    if(result['data'][1]['product_quantity'] != null){
+                        $("#remaining_quantity").val(result['data'][0]['purchase_quantity']-result['data'][1]['product_quantity']);
+                    }
                 }
             });
         }
     </script>
-
 @stop
 
 @section('content')
