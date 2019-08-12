@@ -39,7 +39,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getAccess()
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function($model)
+        {
+            $model->created_by = Auth::user()->name;
+            $model->updated_by = Auth::user()->name;
+        });
+        static::updating(function($model)
+        {
+            $model->updated_by = Auth::user()->name;
+        });
+    }
+
+    public function getUserPermissions()
     {
         $access = DB::table('users')
             ->join('user_roles','user_roles.user_id','=','users.id')

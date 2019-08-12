@@ -21,9 +21,9 @@ class UserPolicy
 
     public function hasInventoryModular(User $user)
     {
-        $accesses= $user->getAccess();
-        foreach($accesses as $access){
-            if($access->permission_name == "access.inventory"){
+        $permissions= $user->getUserPermissions();
+        foreach($permissions as $permission){
+            if($permission->permission_name == "access.inventory"){
                 return true;
             }
         }

@@ -53,11 +53,11 @@
             <span>Orders</span></a>
     </li>
 
-    {{--<li class="nav-item">--}}
-        {{--<a class="nav-link" href="{{route('template')}}">--}}
-            {{--<i class="fas fa-fw fa-file-invoice"></i>--}}
-            {{--<span>Templates</span></a>--}}
-    {{--</li>--}}
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('user')}}">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Users</span></a>
+    </li>
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">

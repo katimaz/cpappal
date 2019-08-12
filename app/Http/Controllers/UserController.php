@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,17 +19,28 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('admin.user.index',compact('users'));
     }
 
+    public function add()
+    {
+        return view('admin.user.add');
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('user')->with('success', true)->with('message','User created successfully!');
     }
 
     /**
@@ -56,7 +73,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.user.edit',compact('user'));
     }
 
     /**
@@ -66,9 +84,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user = User::find($request->id);
+        $user->name  = $request->name;
+        $user->email = $request->email;
+
+        if(!(is_null($request->password)) || (str_replace(' ', '', $request->password) !='')){
+            $user->email = $request->password;
+        }
+        $user->save();
+
+        return redirect()->route('user')->with('success', true)->with('message','User updated successfully!');
     }
 
     /**
@@ -77,8 +104,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        User::destroy($request->id);
+        return redirect()->route('user');
     }
 }
