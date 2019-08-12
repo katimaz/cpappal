@@ -25,6 +25,27 @@
                     <label for="password" class="input-label">Password</label>
                 </div>
             </div>
+
+            <h1 class="h3 mb-2 text-gray-800">Permissions</h1>
+
+
+            @foreach($permissions as $key => $permission)
+                @if($key % 6 == 0)
+                    <div class="form-group row">
+                @endif
+                        <div class="col-sm-2 mb-3 mb-sm-0">
+                            <div class="custom-control custom-checkbox small">
+                                <input type="checkbox" class="custom-control-input" name="{{$permission->name}}" id="{{$permission->name}}">
+                                <label class="custom-control-label" for="{{$permission->name}}">{{$permission->description}}</label>
+                            </div>
+                        </div>
+                @if( ($key+1) % 6 == 0)
+                    </div>
+                @endif
+                @if(count($permissions) == ($key+1))
+                    </div>
+                @endif
+            @endforeach
             <button type="submit" class="btn btn-primary btn-block">
                 Edit
             </button>
