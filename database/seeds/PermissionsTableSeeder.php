@@ -11,6 +11,117 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('user_roles')->insert([
+            [
+                'user_id' => 1,
+                'role_id' => 1,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+        ]);
+
+        DB::table('role_permissions')->insert([
+            [
+                'role_id' => 1,
+                'permission_id' => 1,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+            [
+                'role_id' => 1,
+                'permission_id' => 2,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+            [
+                'role_id' => 1,
+                'permission_id' => 3,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+            [
+                'role_id' => 1,
+                'permission_id' => 4,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+            [
+                'role_id' => 1,
+                'permission_id' => 5,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+            [
+                'role_id' => 1,
+                'permission_id' => 6,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+            [
+                'role_id' => 1,
+                'permission_id' => 7,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+            [
+                'role_id' => 1,
+                'permission_id' => 8,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+            [
+                'role_id' => 1,
+                'permission_id' => 9,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+            [
+                'role_id' => 1,
+                'permission_id' => 10,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+            [
+                'role_id' => 1,
+                'permission_id' => 11,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+            [
+                'role_id' => 1,
+                'permission_id' => 12,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+            [
+                'role_id' => 1,
+                'permission_id' => 13,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+            [
+                'role_id' => 1,
+                'permission_id' => 14,
+                'created_by' => 'system',
+                'updated_by' => 'system',
+
+            ],
+        ]);
+
         DB::table('roles')->insert([
             [
                 'name' => 'admin',
