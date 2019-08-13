@@ -14,17 +14,20 @@ class PermissionsTableSeeder extends Seeder
         DB::table('roles')->insert([
             [
                 'name' => 'admin',
+                'description' => 'Admin',
                 'created_by' => 'system',
                 'updated_by' => 'system',
 
             ],
             [
                 'name' => 'operator',
+                'description' => 'Operator',
                 'created_by' => 'system',
                 'updated_by' => 'system',
             ],
             [
                 'name' => 'sales',
+                'description' => 'Sales',
                 'created_by' => 'system',
                 'updated_by' => 'system',
             ],
