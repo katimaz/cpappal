@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/', 'AdminController@index');
 
 Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', 'AdminController@index')->name('dashboard')->middleware('can:hasDashboardAccess,App\User');
+    Route::get('/dashboard', 'AdminController@index')->name('dashboard');   
 
     Route::get('/category', 'CategoryController@index')->name('category')->middleware('can:hasCategoryAccess,App\User');
     Route::get('/category/add', 'CategoryController@add')->name('category.add');
