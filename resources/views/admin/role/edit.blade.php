@@ -9,6 +9,7 @@
     <style>
     .cursor-pointer{
         cursor: pointer;
+        user-select: none;
     }
     </style>
 @stop
