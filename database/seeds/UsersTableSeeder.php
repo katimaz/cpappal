@@ -351,12 +351,5 @@ class UsersTableSeeder extends Seeder
                 'updated_by' => 'system',
             ]
         ]);
-
-        DB::table('roles')->insert([
-            ['name' => 'admin'],
-            ['name' => 'operator'],
-            ['name' => 'sales'],
-        ]);
-
     }
 }

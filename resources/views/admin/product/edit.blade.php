@@ -214,7 +214,7 @@
             </button>
         </form>
         </br>
-        @can('hasInventoryModular',Auth::user())
+        @can('hasInventoryAccess',Auth::user())
             <div class="row">
                 <div class="col-2 col-sm-12 col-md-2 col-lg-2">
                     <div class="row">
