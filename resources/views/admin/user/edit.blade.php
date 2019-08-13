@@ -4,6 +4,15 @@
 
 @stop
 
+@section('css')
+    @parent
+    <style>
+        .cursor-pointer{
+            cursor: pointer;
+        }
+    </style>
+@stop
+
 @section('content')
     <div class="container-fluid">
         <h1 class="h3 mb-2 text-gray-800">Edit User</h1>
@@ -31,10 +40,10 @@
                 @if($key % 6 == 0)
                     <div class="form-group row">
                 @endif
-                        <div class="col-sm-2 mb-3 mb-sm-0">
+                        <div class="col-sm-2 mb-3 mb-sm-0 cursor-pointer">
                             <div class="custom-control custom-checkbox small">
                                 <input type="checkbox" class="custom-control-input" name="roles[]" value="{{$role->id}}" id="{{$role->name}}" {{$role->role_id != null?'checked' : ''}}>
-                                <label class="custom-control-label" for="{{$role->name}}">{{$role->description}}</label>
+                                <label class="custom-control-label cursor-pointer" for="{{$role->name}}">{{$role->description}}</label>
                             </div>
                         </div>
                 @if( ($key+1) % 6 == 0)

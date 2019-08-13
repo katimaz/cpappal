@@ -104,7 +104,7 @@ class UserController extends Controller
         $user->name  = $request->name;
         $user->email = $request->email;
         if(!(is_null($request->password)) || (str_replace(' ', '', $request->password) !='')){
-            $user->email = $request->password;
+            $user->password = $request->password;
         }
         $user->save();
 
