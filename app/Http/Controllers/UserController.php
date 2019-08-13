@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Permission;
+use App\Role;
+use App\RolePermission;
 use App\User;
+use App\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use DB;
 
 class UserController extends Controller
 {
@@ -26,7 +30,8 @@ class UserController extends Controller
 
     public function add()
     {
-        return view('admin.user.add');
+        $roles = Role::orderBy('id','asc')->get();
+        return view('admin.user.add',compact('roles'));
     }
     /**
      * Show the form for creating a new resource.
@@ -40,6 +45,8 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
+
+        $this->createUserRole($request->roles,$user->id);
 
         return redirect()->route('user')->with('success', true)->with('message','User created successfully!');
     }
@@ -75,8 +82,13 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $permissions = Permission::all();
-        return view('admin.user.edit',compact('user','permissions'));
+        $roles = DB::select("select roles.id, roles.name,roles.description,user_roles.role_id
+                from roles left join 
+                (select user_roles.user_id,user_roles.role_id from user_roles where user_roles.user_id = $id) as user_roles
+                on roles.id = user_roles.role_id
+                order by roles.id asc
+                ");
+        return view('admin.user.edit',compact('user','roles'));
     }
 
     /**
@@ -91,12 +103,12 @@ class UserController extends Controller
         $user = User::find($request->id);
         $user->name  = $request->name;
         $user->email = $request->email;
-
         if(!(is_null($request->password)) || (str_replace(' ', '', $request->password) !='')){
             $user->email = $request->password;
         }
         $user->save();
 
+        $this->createUserRole($request->roles,$request->id);
         return redirect()->route('user')->with('success', true)->with('message','User updated successfully!');
     }
 
@@ -110,5 +122,17 @@ class UserController extends Controller
     {
         User::destroy($request->id);
         return redirect()->route('user');
+    }
+
+    function createUserRole($roles,$id){
+        UserRole::where('user_id', $id)->delete();
+        if($roles != null){
+            foreach($roles as $role){
+                $userRole = new UserRole();
+                $userRole->role_id = $role;
+                $userRole->user_id = $id;
+                $userRole->save();
+            }
+        }
     }
 }

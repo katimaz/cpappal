@@ -59,6 +59,12 @@
             <span>Users</span></a>
     </li>
 
+{{--    <li class="nav-item">--}}
+{{--        <a class="nav-link" href="{{route('role')}}">--}}
+{{--            <i class="fas fa-fw fa-user"></i>--}}
+{{--            <span>Roles</span></a>--}}
+{{--    </li>--}}
+
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-chart-bar"></i>
@@ -81,6 +87,7 @@
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar" style="">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Settings:</h6>
+                <a class="collapse-item" href="{{route('role')}}">Roles</a>
                 <a class="collapse-item" href="{{route('category')}}">Categories</a>
                 <a class="collapse-item" href="{{route('template')}}">Templates</a>
                 <a class="collapse-item" href="{{route('ordertype')}}">Order Type</a>

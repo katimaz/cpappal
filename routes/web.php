@@ -98,6 +98,13 @@ Route::prefix('admin')->group(function () {
     Route::post('/user/update', 'UserController@update')->name('user.update');
     Route::post('/user/destroy', 'UserController@destroy')->name('user.destroy');
 
+    Route::get('/role', 'RoleController@index')->name('role');
+    Route::get('/role/add', 'RoleController@add')->name('role.add');
+    Route::post('/role/create', 'RoleController@create')->name('role.create');
+    Route::get('/role/edit/{id}', 'RoleController@edit')->name('role.edit');
+    Route::post('/role/update', 'RoleController@update')->name('role.update');
+    Route::post('/role/destroy', 'RoleController@destroy')->name('role.destroy');
+
     Route::get('getdata','AdminController@getdata')->name('getData');
     Route::get('getmonthdata','AdminController@getMonthdata')->name('getMonthData');
 
