@@ -33,6 +33,9 @@
         var x = 1;
         var i = 1;
         var y = 1;
+        if(y == 1){
+            $('#minus_product').hide();
+        }
         var order_date = '';
     </script>
     <script src="{{ asset('js/order.js')}}"></script>
@@ -141,9 +144,8 @@
             <h1 class="h4 mb-2 text-gray-600">Products</h1>
             <p class="mb-4"></p>
             <a id="add" style="margin-bottom: 20px;color: white;cursor: pointer" class="btn btn-xs btn-primary"><i class="fas fa-fw fa-plus-circle"></i></a>
-            <a id="minus" style="margin-bottom: 20px;color: white;cursor: pointer; display:none" class="btn btn-xs btn-danger"><i class="fas fa-fw fa-minus-circle"></i></a>
             <div class="form-group row">
-                <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="col-sm-5 mb-3 mb-sm-0">
                     <select id="category-select" class="category-select select selectpicker show-tick form-control" data-size="5" data-style="droplist-style" data-live-search="true" data-show-subtext="true" required>
                         <option value="" selected disabled hidden>Choose one of the category...</option>
                            @foreach($categories as $category)
@@ -151,13 +153,16 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="col-sm-5 mb-3 mb-sm-0">
                     <select id="product-select" class="product-select select selectpicker show-tick form-control" data-size="5" data-style="droplist-style" data-live-search="true" data-show-subtext="true" required>
                         <option value="" selected disabled hidden>Choose one of the product...</option>
                     </select>
                 </div>
+                <div class="col-sm-2 mb-3 mb-sm-0">
+                    <a id="minus_product" style="margin-bottom: 20px;color: white;cursor: pointer;" class="minus_product btn btn-xs btn-danger"><i class="fas fa-fw fa-minus-circle"></i></a>
+                </div>
             </div>
-            <div id="add_product" class="add_product">
+            <div id="add_new_product" class="add_product">
                 <div class="form-group row">
                     <div class="col-sm-4 mb-3 mb-sm-0" style="display: none">
                         <input type="text" class="input-material form-control" id="product_id" name="product_id[]">
@@ -198,7 +203,7 @@
                     </div>
                     <div class="col-sm-2">
                         <a id="insert_sub_product" style="margin-bottom: 20px;color: white;cursor: pointer" class="insert_sub_product btn btn-xs btn-primary"><i class="fas fa-fw fa-plus-circle"></i></a>
-                        <a id="minus_sub_product" style="margin-bottom: 20px;color: white;cursor: pointer;display:none" class="minus_sub_product btn btn-xs btn-danger"><i class="fas fa-fw fa-minus-circle"></i></a>
+                        <a id="minus_sub_product" style="margin-bottom: 20px;color: white;cursor: pointer;display:none" class="minus_sub_product btn btn-xs btn-danger" value="0"><i class="fas fa-fw fa-minus-circle"></i></a>
                     </div>
                 </div>
             </div>
@@ -211,6 +216,53 @@
                 Create
             </button>
         </form>
+        <div id="add_new_product" class="add_product non-display">
+            <div class="form-group row">
+                <div class="col-sm-4 mb-3 mb-sm-0" style="display: none">
+                    <input type="text" class="input-material form-control" id="product_id" name="product_id[]" value="0">
+                    <!--product_id must be first one-->
+                    <input type="text" class="input-material form-control" id="ui_product_id" name="ui_product_id[]" value="0">
+
+                </div>
+                <div class="col-sm-4 mb-3 mb-sm-0">
+                    <input type="text" class="input-material form-control" id="product_name" name="product_name[]" placeholder="Enter Product Name" value="" required="">
+                    <label for="product_name" class="input-label">Product Name</label>
+                    <input type="hidden" id="order_productsid" name="order_productsid[]" value="0">
+                </div>
+                <div class="col-sm-4 mb-3 mb-sm-0">
+                    <input type="text" class="input-material form-control" id="product_model_no" name="product_model_no[]" placeholder="Enter Model Number" value="">
+                    <label for="product_model_no" class="input-label">Product Model Name</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="input-material form-control product-price" id="product_price" name="product_price[]" placeholder="Enter Price" value="0" required="">
+                    <label for="product_price" class="input-label">Product Price</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="input-material form-control product-price" min="1" id="product_quantity" name="product_quantity[]" placeholder="Enter Quantity Name" value="1" required="">
+                    <label for="quantity" class="input-label">Quantity</label>
+                </div>
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="input-material form-control total-price" id="product_total_price" name="product_total_price[]" placeholder="Enter Total Price" value="0">
+                    <label for="product_total_price" class="input-label">Product Total Price</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-5 mb-3 mb-sm-0">
+                    <input type="text" class="input-material form-control" id="product_serial_no" name="product_serial_no[]" placeholder="Enter Product Serial Number" value="">
+                    <label for="product_serial_no" class="input-label">Product Serial Number</label>
+                </div>
+                <div class="col-sm-5 mb-3 mb-sm-0">
+                    <input type="text" class="input-material form-control" id="product_remark" name="product_remark[]" placeholder="Enter Product Remark" value="">
+                    <label for="product_remark" class="input-label">Product Remark</label>
+                </div>
+                <div class="col-sm-2">
+                    <a id="insert_sub_product" style="margin-bottom: 20px;color: white;cursor: pointer" class="insert_sub_product btn btn-xs btn-primary"><i class="fas fa-fw fa-plus-circle"></i></a>
+                    <a id="minus_sub_product" style="margin-bottom: 20px;color: white;cursor: pointer;display:none" class="minus_sub_product btn btn-xs btn-danger" value="0"><i class="fas fa-fw fa-minus-circle"></i></a>
+                </div>
+            </div>
+        </div>
         <div id="add_sub_product" class="non-display">
             <div class="form-group row">
                 <div class="col-2 col-sm-2 mb-3 mb-sm-0">

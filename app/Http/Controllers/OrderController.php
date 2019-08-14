@@ -182,8 +182,14 @@ class OrderController extends Controller
         $order->order_currency_ratio = $request->currency_ratio;
         $order->save();
 
+        $orderProducts = OrderProduct::where('order_id',$request->order_id)->get();
+        foreach($orderProducts as $orderProduct){
+            OrderSubProduct::where('order_product_id',$orderProduct->id)->delete();
+        }
+        OrderProduct::where('order_id',$request->order_id)->delete();
+
         for($i = 0 ;$i <count($request->ui_product_id); $i++) {
-            if($request->order_productsid[$i] == null){
+//            if($request->order_productsid[$i] == null){
                 $orderProduct = new OrderProduct();
                 $orderProduct->order_id = $order->id;
                 $orderProduct->product_id = $request->product_id[$i];
@@ -211,49 +217,50 @@ class OrderController extends Controller
                         $orderSubProduct->save();
                     }
                 }
-            }else{
-                $orderProduct = OrderProduct::find($request->order_productsid[$i]);
-                $orderProduct->order_id = $order->id;
-                $orderProduct->product_id = $request->product_id[$i];
-                $orderProduct->product_name = $request->product_name[$i];
-                $orderProduct->product_model_no = $request->product_model_no[$i];
-                $orderProduct->product_price = $request->product_price[$i];
-                $orderProduct->product_quantity = $request->product_quantity[$i];
-                $orderProduct->product_total_price = $request->product_total_price[$i];
-                $orderProduct->product_serial_no = $request->product_serial_no[$i];
-                $orderProduct->product_remark = $request->product_remark[$i];
-                $orderProduct->save();
-
-                for ($y = 0; $y < count($request->ui_sub_product_id); $y++) {
-                    if ($request->ui_product_id[$i] == $request->ui_sub_product_id[$y]) {
-                        if($request->sub_product_db_id[$y] == null){
-                            $orderSubProduct = new OrderSubProduct();
-                            $orderSubProduct->order_product_id = $orderProduct->id;
-                            $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
-                            $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
-                            $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
-                            $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
-                            $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
-                            $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
-                            $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
-                            $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
-                            $orderSubProduct->save();
-                        }else{
-                            $orderSubProduct = OrderSubProduct::find($request->sub_product_db_id[$y]);
-                            $orderSubProduct->order_product_id = $orderProduct->id;
-                            $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
-                            $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
-                            $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
-                            $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
-                            $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
-                            $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
-                            $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
-                            $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
-                            $orderSubProduct->save();
-                        }
-                    }
-                }
-            }
+//            }
+//            else{
+//                $orderProduct = OrderProduct::find($request->order_productsid[$i]);
+//                $orderProduct->order_id = $order->id;
+//                $orderProduct->product_id = $request->product_id[$i];
+//                $orderProduct->product_name = $request->product_name[$i];
+//                $orderProduct->product_model_no = $request->product_model_no[$i];
+//                $orderProduct->product_price = $request->product_price[$i];
+//                $orderProduct->product_quantity = $request->product_quantity[$i];
+//                $orderProduct->product_total_price = $request->product_total_price[$i];
+//                $orderProduct->product_serial_no = $request->product_serial_no[$i];
+//                $orderProduct->product_remark = $request->product_remark[$i];
+//                $orderProduct->save();
+//
+//                for ($y = 0; $y < count($request->ui_sub_product_id); $y++) {
+//                    if ($request->ui_product_id[$i] == $request->ui_sub_product_id[$y]) {
+//                        if($request->sub_product_db_id[$y] == null){
+//                            $orderSubProduct = new OrderSubProduct();
+//                            $orderSubProduct->order_product_id = $orderProduct->id;
+//                            $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
+//                            $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
+//                            $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
+//                            $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
+//                            $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
+//                            $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
+//                            $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
+//                            $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
+//                            $orderSubProduct->save();
+//                        }else{
+//                            $orderSubProduct = OrderSubProduct::find($request->sub_product_db_id[$y]);
+//                            $orderSubProduct->order_product_id = $orderProduct->id;
+//                            $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
+//                            $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
+//                            $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
+//                            $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
+//                            $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
+//                            $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
+//                            $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
+//                            $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
+//                            $orderSubProduct->save();
+//                        }
+//                    }
+//                }
+//            }
         }
         return redirect()->route('order')->with('success', true)->with('message','Order updated successfully!');
     }

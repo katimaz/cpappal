@@ -18,7 +18,7 @@ $('#customer-select').on('changed.bs.select', function (e) {
 
 $(document).on('change', '.category-select', function(e) {
     var category_id = $(this).find("option:selected").attr('category_id');
-    var product_select =  $(this).closest('div.col-sm-6').next().find('select.product-select');
+    var product_select =  $(this).closest('div.col-sm-5').next().find('select.product-select');
     getProductItems("Choose one of the product...",category_id,product_select)
 });
 
@@ -122,26 +122,26 @@ $(document).on('click', '.minus_sub_product', function (e) {
     }else if(typeof $(this).closest('div.form-group').parent().next().find('div.col-sm-2').attr('class') === "undefined"){
         $(this).hide();
     }
+    $('#sum_total_price').text('$ ' + sum_price());
+    $('#order_total_price').val(sum_price());
 });
 
-$('#minus').click(function () {
-    i--;
-    $(this).next('div').remove();
-    $(this).next('div').remove();
+$(document).on('click', '.minus_product', function (e) {
+    var countSubProduct = $(this).closest('div.form-group').next('div').find('div.col-sm-2').find('#minus_sub_product').attr('value');
+    while(countSubProduct != 0){
+        $(this).closest('div.form-group').next('div').next('div').remove();
+        $(this).closest('div.form-group').next('div').next('div').remove();
+        countSubProduct--;
+    }
+    $(this).closest('div.form-group').next('div').remove();
+    $(this).closest('div.form-group').remove();
 
-    var subproduct = true;
-    while (subproduct) {
-        if (typeof $(this).next('div').find('div.col-sm-2').attr('class') === "undefined") {
-            subproduct = false;
-        } else {
-            $(this).next('div').remove();
-            $(this).next('div').remove();
-        }
+    if($('.minus_product').length == 1){
+        $('#minus_product').hide();
     }
 
-    if (i == y) {
-        $('#minus').hide();
-    }
+    $('#sum_total_price').text('$ ' + sum_price());
+    $('#order_total_price').val(sum_price());
 });
 
 $(document).on('click', '.insert_sub_product', function (e) {
@@ -211,8 +211,9 @@ $(document).on('click', '.insert_sub_product', function (e) {
 });
 
 $("#add").click(function () {
-    $('#minus').show();
-    var add_product = $('#add_product').clone().attr('id', "add_product" + i);
+    $('.minus_product').show();
+    var add_product = $('#add_new_product').clone().attr('id', "add_new_product" + i);
+    add_product.removeClass('non-display');
 
     add_product.find('#minus_sub_product').hide();
     add_product.find('#ui_product_id').attr('value', i + 1);
@@ -252,9 +253,11 @@ $("#add").click(function () {
 
     add_product.find('#order_productsid').attr('value', '');
 
+    add_product.find('#minus_sub_product').attr('value','0');
 
-    add_product.insertAfter('#minus');
+    add_product.insertAfter('#add');
 
+    var MinusProduct = $("#minus_product").clone();
     var CategoryClone = $("#category-select").clone();
     var ProductClone = $("#product-select").clone();
     ProductClone = ProductClone.empty().append('<option value="" selected disabled hidden>Choose one of the product...</option>');
@@ -262,16 +265,21 @@ $("#add").click(function () {
     var formDiv = document.createElement('div');
     formDiv.className = 'form-group row';
     var innerDiv1 = document.createElement('div');
-    innerDiv1.className = 'col-sm-6 mb-3 mb-sm-0';
+    innerDiv1.className = 'col-sm-5 mb-3 mb-sm-0';
     formDiv.appendChild(innerDiv1);
 
     var innerDiv2 = document.createElement('div');
-    innerDiv2.className = 'col-sm-6 mb-3 mb-sm-0';
+    innerDiv2.className = 'col-sm-5 mb-3 mb-sm-0';
     formDiv.appendChild(innerDiv2);
 
-    $('#minus').after(formDiv);
-    $('#minus').next('div').find('.col-sm-6').first().append(CategoryClone);
-    $('#minus').next('div').find('.col-sm-6').next().append(ProductClone);
+    var innerDiv3 = document.createElement('div');
+    innerDiv3.className = 'col-sm-2 mb-3 mb-sm-0';
+    formDiv.appendChild(innerDiv3);
+
+    $('#add').after(formDiv);
+    $('#add').next('div').find('.col-sm-5').first().append(CategoryClone);
+    $('#add').next('div').find('.col-sm-5').last().append(ProductClone);
+    $('#add').next('div').find('.col-sm-2').first().append(MinusProduct);
 
     CategoryClone.val('');
     ProductClone.val('');
