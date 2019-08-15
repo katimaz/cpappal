@@ -311,6 +311,10 @@ $( "#invoice_number" ).keypress(function(event) {
     return validateNumber(event);
 });
 
+$("#invoice_date").keypress(function(event) {
+    return false;
+});
+
 function sum_price() {
     var sum = 0;
     $('.total-price').each(function () {

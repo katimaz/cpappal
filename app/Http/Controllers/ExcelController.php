@@ -14,16 +14,30 @@ class ExcelController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function exportSalesPage(){
+        return view('admin.report.sales');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
 
-    public function exportSales(){
+    public function exportSales(Request $request){
+
+        $from_date = $request->from_date;
+        if($from_date == null){
+            $from_date = '1990-01-01';
+        }
+        $to_date = $request->to_date;
+        if($to_date == null){
+            $to_date = '2099-01-01';
+        }
 
         $orders = DB::table('orders')
             ->where('orders.separate','=',null)
+            ->whereBetween('orders.order_date',[$from_date,$to_date])
             ->get();
 
         $orderSubProducts = DB::table('order_sub_products')
@@ -37,8 +51,9 @@ class ExcelController extends Controller
         $reader = IOFactory::createReader('Xlsx');
         $spreadsheet = $reader->load(public_path('template/sale.xlsx'));
 
-        $row = 2;
-
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('C1', $from_date);
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('E1', $to_date);
+        $row = 3;
         foreach ($orders as $key => $order){
             $model = '';
             $order_no = $order->order_no;
@@ -111,7 +126,22 @@ class ExcelController extends Controller
         $writer->save('php://output');
         exit;
     }
+
+    public function exportDeviceSalesPage(){
+        return view('admin.report.devicesales');
+    }
+
     public function exportDeviceSale(Request $request){
+
+        $from_date = $request->from_date;
+        if($from_date == null){
+            $from_date = '1990-01-01';
+        }
+        $to_date = $request->to_date;
+        if($to_date == null){
+            $to_date = '2099-01-01';
+        }
+
         $orders = DB::table('orders')
             ->join('order_products','order_products.order_id','orders.id')
             ->join('products','products.id','order_products.product_id')
@@ -119,6 +149,7 @@ class ExcelController extends Controller
             ->where('orders.separate','=',null)
             ->where('products.device_check','=','Y')
             ->where('orders.order_type','=','S')
+            ->whereBetween('orders.order_date',[$from_date,$to_date])
             ->select('orders.id as ordersid' ,'orders.*','order_products.id as order_productsid', 'order_products.*','categories.name as category_name','products.maintenance_period as maintenance_period')
             ->get();
 
@@ -149,8 +180,9 @@ class ExcelController extends Controller
         $reader = IOFactory::createReader('Xlsx');
         $spreadsheet = $reader->load(public_path('template/device_sale_template.xlsx'));
 
-        $row = 2;
-
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('C1', $from_date);
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('E1', $to_date);
+        $row = 3;
         foreach ($orders as $key => $order){
 
             $maintenance_date = date('Y-m-d', strtotime($order->order_date . "+".$order->maintenance_period." months") );

@@ -80,8 +80,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Reports:</h6>
-                <a class="collapse-item" href="{{route('exportDeviceSale')}}">Device Sale List</a>
-                <a class="collapse-item" href="{{route('exportSales')}}">Sale List</a>
+                <a class="collapse-item" href="{{route('devicesales')}}">Device Sale List</a>
+                <a class="collapse-item" href="{{route('sales')}}">Sale List</a>
             </div>
         </div>
     </li>

@@ -67,6 +67,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/template/destroy', 'TemplateController@destroy')->name('template.destroy');
 
     Route::get('/export/{id}', 'ExcelController@index')->name('export');
+    Route::get('/devicesales', 'ExcelController@exportDeviceSalesPage')->name('devicesales');
+    Route::get('/sales', 'ExcelController@exportSalesPage')->name('sales');
     Route::get('/exportDeviceSaleList', 'ExcelController@exportDeviceSale')->name('exportDeviceSale');
     Route::get('/exportSaleList', 'ExcelController@exportSales')->name('exportSales');
 
