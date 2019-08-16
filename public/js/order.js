@@ -19,13 +19,13 @@ $('#customer-select').on('changed.bs.select', function (e) {
 $(document).on('change', '.category-select', function(e) {
     var category_id = $(this).find("option:selected").attr('category_id');
     var product_select =  $(this).closest('div.col-sm-5').next().find('select.product-select');
-    getProductItems("Choose one of the product...",category_id,product_select)
+    getProductItems($selectProductOption,category_id,product_select)
 });
 
 $(document).on('change', '.sub-category-select', function(e) {
     var sub_category_id = $(this).find("option:selected").attr('category_id');
     var sub_product_select =  $(this).closest('div.col-sm-5').next().find('select.sub-product-select');
-    getProductItems("Choose one of the product...",sub_category_id,sub_product_select)
+    getProductItems($selectProductOption,sub_category_id,sub_product_select)
 });
 
 function getProductItems(desc,category_id,product_select){
@@ -183,7 +183,7 @@ $(document).on('click', '.insert_sub_product', function (e) {
 
     var ProductClone = $("#product-select").clone().attr('id', 'sub-product-select').addClass('sub-product-select').removeClass('product-select').prop('required', true);
     var CategoryClone = $("#category-select").clone().attr('id', 'sub-category-select').addClass('sub-category-select').removeClass('category-select').prop('required', true);
-    ProductClone = ProductClone.empty().append('<option value="" selected disabled hidden>Choose one of the product...</option>');
+    ProductClone = ProductClone.empty().append('<option value="" selected disabled hidden>'+$selectProductOption+'</option>');
 
     var formDiv = document.createElement('div');
     formDiv.className = 'form-group row';
@@ -260,7 +260,7 @@ $("#add").click(function () {
     var MinusProduct = $("#minus_product").clone();
     var CategoryClone = $("#category-select").clone();
     var ProductClone = $("#product-select").clone();
-    ProductClone = ProductClone.empty().append('<option value="" selected disabled hidden>Choose one of the product...</option>');
+    ProductClone = ProductClone.empty().append('<option value="" selected disabled hidden>'+$selectProductOption+'</option>');
 
     var formDiv = document.createElement('div');
     formDiv.className = 'form-group row';

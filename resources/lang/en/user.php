@@ -12,10 +12,19 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'title' => 'Users',
+    'name' => 'Name',
     'email' => 'Email',
     'password' => 'Password',
-    'login' => 'Login',
+    'updated.by' => 'Updated By',
+    'updated.time' => 'Updated Time',
+    'action' => 'Action',
+    'create' => 'Create User',
+    'add' => 'Create',
+    'edit' => 'Edit User',
+    'update' => 'Edit',
+    'delete.title' => 'Delete User',
+    'delete.description' => 'Delete this user?',
+    'close' => 'Close',
+    'yes' => 'Yes',
 ];

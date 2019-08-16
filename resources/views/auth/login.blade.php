@@ -25,7 +25,7 @@
                                             @csrf
                                             <div class="form-group">
                                                 <input id="email" type="email" class="input-material form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder=" ">
-                                                <label for="email" class="input-label">{{ __('Email') }}</label>
+                                                <label for="email" class="input-label">{{ __('auth.email') }}</label>
                                                 @if ($errors->has('email'))
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('email') }}</strong>
@@ -35,7 +35,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <input id="password" type="password" class="input-material form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required autocomplete="current-password" placeholder=" ">
-                                                <label for="password" class="input-label">{{ __('Password') }}</label>
+                                                <label for="password" class="input-label">{{ __('auth.password') }}</label>
                                                 @if ($errors->has('password'))
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('password') }}</strong>
@@ -50,7 +50,7 @@
                                                 {{--</div>--}}
                                             {{--</div>--}}
                                             <button type="submit" class="btn btn-primary btn-user btn-block">
-                                                {{ __('Login') }}
+                                                {{ __('auth.login') }}
                                             </button>
                                             {{--<hr>--}}
                                             {{--<a href="index.html" class="btn btn-google btn-user btn-block">--}}

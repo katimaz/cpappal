@@ -17,7 +17,7 @@
     <li class="nav-item active">
         <a class="nav-link" href="{{route('dashboard')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
+            <span>{{__('dashboard.title')}}</span>
         </a>
     </li>
     @endcan
@@ -41,28 +41,28 @@
     <li class="nav-item">
         <a class="nav-link" href="{{route('customer')}}">
             <i class="fas fa-fw fa-users"></i>
-            <span>Customers</span></a>
+            <span>{{__('customer.title')}}</span></a>
     </li>
     @endcan
     @can('hasProductAccess',Auth::user())
     <li class="nav-item">
         <a class="nav-link" href="{{route('product')}}">
             <i class="fas fa-fw fa-industry"></i>
-            <span>Products</span></a>
+            <span>{{__('product.title')}}</span></a>
     </li>
     @endcan
     @can('hasOrderAccess',Auth::user())
     <li class="nav-item">
         <a class="nav-link" href="{{route('order')}}">
             <i class="fas fa-fw fa-file-invoice-dollar"></i>
-            <span>Orders</span></a>
+            <span>{{__('order.title')}}</span></a>
     </li>
     @endcan
     @can('hasUserAccess',Auth::user())
     <li class="nav-item">
         <a class="nav-link" href="{{route('user')}}">
             <i class="fas fa-fw fa-user"></i>
-            <span>Users</span></a>
+            <span>{{__('user.title')}}</span></a>
     </li>
     @endcan
 
@@ -75,13 +75,13 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-chart-bar"></i>
-            <span>Reports</span>
+            <span>{{__('reports.title')}}</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Reports:</h6>
-                <a class="collapse-item" href="{{route('devicesales')}}">Device Sale List</a>
-                <a class="collapse-item" href="{{route('sales')}}">Sale List</a>
+                <h6 class="collapse-header">{{__('reports.title')}}:</h6>
+                <a class="collapse-item" href="{{route('devicesales')}}">{{__('reports.device.sale.title')}}</a>
+                <a class="collapse-item" href="{{route('sales')}}">{{__('reports.sale.title')}}</a>
             </div>
         </div>
     </li>
@@ -90,28 +90,28 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
             <i class="fas fa-fw fa-cogs"></i>
-            <span>Settings</span>
+            <span>{{__('settings.title')}}</span>
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar" style="">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Settings:</h6>
+                <h6 class="collapse-header">{{__('settings.title')}}:</h6>
                 @can('hasRoleAccess',Auth::user())
-                <a class="collapse-item" href="{{route('role')}}">Roles</a>
+                <a class="collapse-item" href="{{route('role')}}">{{__('role.title')}}</a>
                 @endcan
                 @can('hasCategoryAccess',Auth::user())
-                <a class="collapse-item" href="{{route('category')}}">Categories</a>
+                <a class="collapse-item" href="{{route('category')}}">{{__('category.title')}}</a>
                 @endcan
                 @can('hasTemplateAccess',Auth::user())
-                <a class="collapse-item" href="{{route('template')}}">Templates</a>
+                <a class="collapse-item" href="{{route('template')}}">{{__('template.title')}}</a>
                 @endcan
                 @can('hasOrderTypeAccess',Auth::user())
-                <a class="collapse-item" href="{{route('ordertype')}}">Order Type</a>
+                <a class="collapse-item" href="{{route('ordertype')}}">{{__('ordertype.title')}}</a>
                 @endcan
                 @can('hasCountryAccess',Auth::user())
-                <a class="collapse-item" href="{{route('country')}}">Countries</a>
+                <a class="collapse-item" href="{{route('country')}}">{{__('country.title')}}</a>
                 @endcan
                 @can('hasCurrencyAccess',Auth::user())
-                <a class="collapse-item" href="{{route('currency')}}">Currencies</a>
+                <a class="collapse-item" href="{{route('currency')}}">{{__('currency.title')}}</a>
                 @endcan
             </div>
         </div>

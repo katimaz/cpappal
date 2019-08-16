@@ -21,6 +21,26 @@
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
+        <ul class="navbar-nav ml-auto">
+            <!-- Authentication Links -->
+            @php $locale = session()->get('locale'); @endphp
+            <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    @switch($locale)
+                        @case('cn')
+                        <img src="{{asset('img/lang/tw.png')}}" width="22px" height="20px">
+                        @break
+                        @default
+                        <img src="{{asset('img/lang/en.png')}}" width="22px" height="20px">
+                    @endswitch
+                    <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{'/en'}}"><img src="{{asset('img/lang/en.png')}}" width="18px" height="12px"> English</a>
+                    <a class="dropdown-item" href="{{'/cn'}}"><img src="{{asset('img/lang/tw.png')}}" width="18px" height="12px"> 中文</a>
+                </div>
+            </li>
+        </ul>
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -37,10 +57,9 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
                 </form>
+
             </div>
         </li>
-
     </ul>
-
 </nav>
 <!-- End of Topbar -->

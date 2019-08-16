@@ -13,9 +13,9 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => '請確認輸入正確的帳號\密碼.',
+    'throttle' => '登錄嘗試次數過多. 請再 :seconds 秒後再試.',
     'email' => 'Email',
-    'password' => 'Password',
-    'login' => 'Login',
+    'password' => '密碼',
+    'login' => '登入',
 ];

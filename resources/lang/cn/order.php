@@ -12,10 +12,15 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'email' => 'Email',
-    'password' => 'Password',
-    'login' => 'Login',
+    'title' => '訂單',
+    'create.title' => '新增訂單',
+    'order.date' => '訂單日期',
+    'price' => '訂單金額',
+    'invoice.date' => '訂單日期',
+    'invoice.number' => '訂單號碼',
+    'hospital.referral' => '醫院介紹',
+    'separate' => '分開',
+    'created.by' => '新增者',
+    'created.time' => '新增時間',
+    'action' => '操作',
 ];

@@ -12,10 +12,11 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'email' => 'Email',
-    'password' => 'Password',
-    'login' => 'Login',
+    'title' => 'Customers',
+    'name' => 'Customer Name',
+    'phone' => 'Customer Phone',
+    'address' => 'Address',
+    'delivery.address' => 'Delivery Address',
+    'remark' => 'Remark',
+    'same.address' => 'Same as address',
 ];

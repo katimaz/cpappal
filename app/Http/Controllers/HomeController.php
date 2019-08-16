@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Category;
+use Illuminate\Support\Facades\App;
 
 class HomeController extends Controller
 {
@@ -17,4 +16,11 @@ class HomeController extends Controller
 
     }
 
+    public function locale($locale){
+        if($locale == 'cn' || $locale == 'en'){
+            app()->setLocale($locale);
+            session()->put('locale', $locale);
+        }
+        return redirect()->back();
+    }
 }

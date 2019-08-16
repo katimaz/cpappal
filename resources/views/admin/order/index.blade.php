@@ -14,8 +14,18 @@
 
     <script>
         $(document).ready(function(){
+            var locale = "{{ Session::get('locale')}}"
+            if(locale == 'cn'){
+                $langUrl = '/vendor/datatables/lang/chinese.json';
+            }else{
+                $langUrl = '/vendor/datatables/lang/english.json';
+            }
+
             $('#dataTable').DataTable({
                 "scrollX": true,
+                "language": {
+                    "url": $langUrl
+                },
                 columnDefs: [{
                     orderable: false,
                     targets: [ 7 ]
@@ -38,7 +48,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Orders</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">{{__('order.title')}}</h6>
                         </div>
                         <div class="card-body">
                             <a style="margin-bottom: 20px" href="{{route('order.add')}}" class="btn btn-xs btn-success"><i class="fas fa-fw fa-plus-circle"></i></a>
@@ -47,13 +57,13 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Order Date</th>
-                                        <th>Customer Name</th>
-                                        <th>Customer Phone</th>
-                                        <th>Price</th>
-                                        <th>Created By</th>
-                                        <th>Created Time</th>
-                                        <th>Action</th>
+                                        <th>{{__('order.order.date')}}</th>
+                                        <th>{{__('customer.name')}}</th>
+                                        <th>{{__('customer.phone')}}</th>
+                                        <th>{{__('order.price')}}</th>
+                                        <th>{{__('order.created.by')}}</th>
+                                        <th>{{__('order.created.time')}}</th>
+                                        <th>{{__('order.action')}}</th>
                                     </tr>
                                     </thead>
                                     <tfoot>

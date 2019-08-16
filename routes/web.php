@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/', 'AdminController@index');
 
+Route::get('/{locale}', 'HomeController@locale');
+
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', 'AdminController@index')->name('dashboard');
 

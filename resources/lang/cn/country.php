@@ -12,10 +12,5 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'email' => 'Email',
-    'password' => 'Password',
-    'login' => 'Login',
+    'title' => '國家',
 ];

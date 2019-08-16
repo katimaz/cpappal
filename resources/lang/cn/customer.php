@@ -12,10 +12,11 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'email' => 'Email',
-    'password' => 'Password',
-    'login' => 'Login',
+    'title' => '客戶',
+    'name' => '客戶名稱',
+    'phone' => '客戶電話',
+    'address' => '地址',
+    'delivery.address' => '送貨地址',
+    'remark' => '備註',
+    'same.address' => '與地址一樣',
 ];

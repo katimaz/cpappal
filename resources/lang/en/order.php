@@ -12,10 +12,16 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'title' => 'Orders',
+    'create.title' => 'Create Order',
+    'order.date' => 'Order Date',
+    'price' => 'Order Price',
+    'invoice.date' => 'Invoice Date',
+    'invoice.number' => 'Invoice Number',
+    'hospital.referral' => 'Hospital Referral',
+    'separate' => 'Separate',
+    'created.by' => 'Created By',
+    'created.time' => 'Created Time',
+    'action' => 'Action',
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'email' => 'Email',
-    'password' => 'Password',
-    'login' => 'Login',
 ];
