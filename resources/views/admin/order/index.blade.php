@@ -110,20 +110,20 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Delete Order</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">{{__('order.delete.title')}}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Delete this order?
+                                {{__('order.delete.description')}}
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('order.close')}}</button>
                                 <form method="post" action="{{route('order.destroy')}}" class="inline">
                                     @csrf
                                     <input type="hidden" id="order_id" name="id">
-                                    <button type="submit" class="btn btn-danger">Yes</button>
+                                    <button type="submit" class="btn btn-danger">{{__('order.yes')}}</button>
                                 </form>
                             </div>
                         </div>

@@ -11,8 +11,17 @@
 
     <script>
         $(document).ready(function(){
+            var locale = "{{ Session::get('locale')}}"
+            if(locale == 'cn'){
+                $langUrl = '/vendor/datatables/lang/chinese.json';
+            }else{
+                $langUrl = '/vendor/datatables/lang/english.json';
+            }
             $('#dataTable').DataTable({
                 "scrollX": true,
+                "language": {
+                    "url": $langUrl
+                },
                 columnDefs: [{
                     orderable: false,
                     targets: [ 6 ]
@@ -34,7 +43,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Currencies</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">{{__('currency.title')}}</h6>
                         </div>
                         <div class="card-body">
                             <a style="margin-bottom: 20px" href="{{route('currency.add')}}" class="btn btn-xs btn-success"><i class="fas fa-fw fa-plus-circle"></i></a>
@@ -43,23 +52,23 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>English Name</th>
-                                        <th>Ratio</th>
-                                        <th>Updated By</th>
-                                        <th>Update Time</th>
-                                        <th>Action</th>
+                                        <th>{{__('currency.name')}}</th>
+                                        <th>{{__('currency.english.name')}}</th>
+                                        <th>{{__('currency.ratio')}}</th>
+                                        <th>{{__('currency.updated.by')}}</th>
+                                        <th>{{__('currency.updated.time')}}</th>
+                                        <th>{{__('currency.action')}}</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>English Name</th>
-                                        <th>Ratio</th>
-                                        <th>Updated By</th>
-                                        <th>Update Time</th>
-                                        <th>Action</th>
+                                        <th>{{__('currency.name')}}</th>
+                                        <th>{{__('currency.english.name')}}</th>
+                                        <th>{{__('currency.ratio')}}</th>
+                                        <th>{{__('currency.updated.by')}}</th>
+                                        <th>{{__('currency.updated.time')}}</th>
+                                        <th>{{__('currency.action')}}</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
@@ -88,20 +97,20 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Delete Currency</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">{{__('currency.delete.title')}}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Delete this currency?
+                                {{__('currency.delete.description')}}
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('currency.close')}}</button>
                                 <form method="post" action="{{route('currency.destroy')}}" class="inline">
                                     @csrf
                                     <input type="hidden" id="currency_id" name="id">
-                                    <button type="submit" class="btn btn-danger">Yes</button>
+                                    <button type="submit" class="btn btn-danger">{{__('currency.yes')}}</button>
                                 </form>
                             </div>
                         </div>

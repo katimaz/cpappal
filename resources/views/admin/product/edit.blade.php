@@ -150,7 +150,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Edit Product</h1>
+        <h1 class="h3 mb-2 text-gray-800">{{__('product.edit.title')}}</h1>
         <p class="mb-4"></p>
 
         <form method="POST" action="{{route('product.update')}}">
@@ -172,11 +172,11 @@
             <div class="form-group row">
                 <div class="col-sm-5 mb-3 mb-sm-0">
                     <input type="text" class="input-material form-control" name="name" id="name" placeholder="Enter Product Name" value="{{$product->name}}" required>
-                    <label for="name" class="input-label">Product Name</label>
+                    <label for="name" class="input-label">{{__('product.title')}}</label>
                 </div>
                 <div class="col-sm-5">
                     <input type="number" class="input-material form-control" id="price" name="price" placeholder="Enter Price" value="{{$product->price}}" required>
-                    <label for="price" class="input-label">Price</label>
+                    <label for="price" class="input-label">{{__('product.price')}}</label>
                 </div>
                 <div class="col-sm-2 mb-2 mb-sm-0 separate">
                     <div class="custom-control custom-checkbox">
@@ -185,18 +185,18 @@
                         @else
                             <input type="checkbox" class="custom-control-input" id="sale_check" name="sale_check" value="{{$product->sale_check}}" checked>
                         @endif
-                        <label class="custom-control-label" for="sale_check">Sale Check</label>
+                        <label class="custom-control-label" for="sale_check">{{__('product.sale.check')}}</label>
                     </div>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-5 mb-3 mb-sm-0">
                     <input type="text" class="input-material form-control" id="model_no" name="model_no" placeholder="Enter Model Number" value="{{$product->model_no}}">
-                    <label for="model_no" class="input-label">Model No</label>
+                    <label for="model_no" class="input-label">{{__('product.model.name')}}</label>
                 </div>
                 <div class="col-sm-5 mb-3 mb-sm-0">
                     <input type="number" class="input-material form-control" id="maintenance_period" name="maintenance_period" placeholder="Enter Maintenance Period (Month)" value="{{$product->maintenance_period}}">
-                    <label for="maintenance_period" class="input-label">Maintenance Period (Month)</label>
+                    <label for="maintenance_period" class="input-label">{{__('product.maintenance.period')}}</label>
                 </div>
                 <div class="col-sm-2 mb-2 mb-sm-0 separate">
                     <div class="custom-control custom-checkbox">
@@ -205,12 +205,12 @@
                         @else
                             <input type="checkbox" class="custom-control-input" id="device_check" name="device_check" value="{{$product->device_check}}" checked>
                         @endif
-                        <label class="custom-control-label" for="device_check">Device Check</label>
+                        <label class="custom-control-label" for="device_check">{{__('product.maintenance.period')}} </label>
                     </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block">
-                Edit
+                {{__('product.edit')}}
             </button>
         </form>
         </br>
@@ -220,25 +220,25 @@
                     <div class="row">
                         <div class="col-12" style="margin-bottom: 20px;">
                             <input type="text" class="input-material form-control readonly-label" id="total_purchase_price" value="0" readonly>
-                            <label class="input-label">Total Purchase Price</label>
+                            <label class="input-label">{{__('product.total.purchase.price')}}</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12" style="margin-bottom: 20px;">
                             <input type="text" class="input-material form-control readonly-label" id="total_purchase_quantity" value="0" readonly>
-                            <label class="input-label">Total Purchase Quantity</label>
+                            <label class="input-label">{{__('product.total.purchase.quantity')}}</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12" style="margin-bottom: 20px;">
                             <input type="text" class="input-material form-control readonly-label" id="average_price" value="0" readonly>
-                            <label class="input-label">Average Price</label>
+                            <label class="input-label">{{__('product.average.price')}}</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12" style="margin-bottom: 20px;">
                             <input type="text" class="input-material form-control readonly-label" id="remaining_quantity" value="0" readonly>
-                            <label class="input-label">Remaining Quantity</label>
+                            <label class="input-label">{{__('product.remaining.quantity')}}</label>
                         </div>
                     </div>
                 </div>

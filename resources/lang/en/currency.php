@@ -13,4 +13,19 @@ return [
     |
     */
     'title' => 'Currencies',
+    'name' => 'Name',
+    'english.name' => 'English Name',
+    'ratio' => 'Ratio',
+    'select.option' => 'Choose one of the currency...',
+    'create.title' => 'Create Currency',
+    'edit.title' => 'Edit Currency',
+    'updated.by' => 'Updated By',
+    'updated.time' => 'Updated Time',
+    'action' => 'Action',
+    'delete.title' => 'Delete Currency',
+    'delete.description' => 'Delete this currency?',
+    'close' => 'Close',
+    'yes' => 'Yes',
+    'add' => 'Create',
+    'edit' => 'Edit',
 ];

@@ -11,8 +11,17 @@
 
     <script>
         $(document).ready(function(){
+            var locale = "{{ Session::get('locale')}}"
+            if(locale == 'cn'){
+                $langUrl = '/vendor/datatables/lang/chinese.json';
+            }else{
+                $langUrl = '/vendor/datatables/lang/english.json';
+            }
             $('#dataTable').DataTable({
                 "scrollX": true,
+                "language": {
+                    "url": $langUrl
+                },
                 columnDefs: [{
                     orderable: false,
                     targets: [ 7 ]
@@ -34,7 +43,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Products</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">{{__('product.title')}}</h6>
                         </div>
                         <div class="card-body">
                             <a style="margin-bottom: 20px" href="{{route('product.add')}}" class="btn btn-xs btn-success"><i class="fas fa-fw fa-plus-circle"></i></a>
@@ -43,25 +52,25 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Category</th>
-                                        <th>Name</th>
-                                        <th>Model#</th>
-                                        <th>Price</th>
-                                        <th>Updated By</th>
-                                        <th>Update Time</th>
-                                        <th>Action</th>
+                                        <th>{{__('category.title')}}</th>
+                                        <th>{{__('product.name')}}</th>
+                                        <th>{{__('product.model')}}</th>
+                                        <th>{{__('product.price')}}</th>
+                                        <th>{{__('product.updated.by')}}</th>
+                                        <th>{{__('product.updated.time')}}</th>
+                                        <th>{{__('product.action')}}</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>#</th>
-                                        <th>Category</th>
-                                        <th>Name</th>
-                                        <th>Serial#</th>
-                                        <th>Price</th>
-                                        <th>Updated By</th>
-                                        <th>Update Time</th>
-                                        <th>Action</th>
+                                        <th>{{__('category.title')}}</th>
+                                        <th>{{__('product.name')}}</th>
+                                        <th>{{__('product.model')}}</th>
+                                        <th>{{__('product.price')}}</th>
+                                        <th>{{__('product.updated.by')}}</th>
+                                        <th>{{__('product.updated.time')}}</th>
+                                        <th>{{__('product.action')}}</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
@@ -91,20 +100,20 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">{{__('product.delete.title')}}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Delete this product?
+                                {{__('product.delete.description')}}
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('product.close')}}</button>
                                 <form method="post" action="{{route('product.destroy')}}" class="inline">
                                     @csrf
                                     <input type="hidden" id="product_id" name="id">
-                                    <button type="submit" class="btn btn-danger">Yes</button>
+                                    <button type="submit" class="btn btn-danger">{{__('product.yes')}}</button>
                                 </form>
                             </div>
                         </div>

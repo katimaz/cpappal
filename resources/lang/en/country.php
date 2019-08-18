@@ -13,4 +13,17 @@ return [
     |
     */
     'title' => 'Countries',
+    'create.title' => 'Create Country',
+    'edit.title' => 'Edit Country',
+    'name' => 'Name',
+    'select.option' => 'Choose one of the country...',
+    'updated.by' => 'Updated By',
+    'updated.time' => 'Updated Time',
+    'action' => 'Action',
+    'delete.title' => 'Delete Country',
+    'delete.description' => 'Delete this country?',
+    'close' => 'Close',
+    'yes' => 'Yes',
+    'add' => 'Create',
+    'edit' => 'Edit',
 ];

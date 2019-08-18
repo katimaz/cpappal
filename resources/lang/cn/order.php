@@ -14,6 +14,7 @@ return [
     */
     'title' => '訂單',
     'create.title' => '新增訂單',
+    'edit.title' => '修改訂單',
     'order.date' => '訂單日期',
     'price' => '訂單金額',
     'invoice.date' => '訂單日期',
@@ -23,4 +24,9 @@ return [
     'created.by' => '新增者',
     'created.time' => '新增時間',
     'action' => '操作',
+    'select.option' => '請選擇以下訂單種類...',
+    'delete.title' => '刪除訂單',
+    'delete.description' => '確定刪除訂單?',
+    'close' => '取消',
+    'yes' => '確定',
 ];

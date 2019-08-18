@@ -128,7 +128,8 @@ $(document).on('click', '.minus_sub_product', function (e) {
 
 $(document).on('click', '.minus_product', function (e) {
     var countSubProduct = $(this).closest('div.form-group').next('div').find('div.col-sm-2').find('#minus_sub_product').attr('value');
-    while(countSubProduct != 0){
+
+    while(countSubProduct != 0 && countSubProduct > 0 ){
         $(this).closest('div.form-group').next('div').next('div').remove();
         $(this).closest('div.form-group').next('div').next('div').remove();
         countSubProduct--;

@@ -13,4 +13,18 @@ return [
     |
     */
     'title' => 'Templates',
+    'create.title' => 'Create Templates',
+    'edit.title' => 'Edit Templates',
+    'name' => 'Name',
+    'remark' => 'Remark',
+    'price' => 'Price',
+    'created.by' => 'Created By',
+    'created.time' => 'Created Time',
+    'action' => 'Action',
+    'delete.title' => 'Template Order',
+    'delete.description' => 'Delete this template?',
+    'close' => 'Close',
+    'yes' => 'Yes',
+    'add' => 'Create',
+    'edit' => 'Edit',
 ];

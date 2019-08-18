@@ -28,14 +28,14 @@
 
 @section('content')
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Create Product</h1>
+        <h1 class="h3 mb-2 text-gray-800">{{__('product.create.title')}}</h1>
         <p class="mb-4"></p>
 
         <form method="POST" action="{{route('product.create')}}">
             @csrf
             <div class="form-group row">
                 <div class="col-sm-12 mb-3 mb-sm-0">
-                    <select class="selectpicker show-tick form-control" data-size="5" data-style="droplist-style" data-live-search="true" title="Choose one of the category..." name="category_id" required>
+                    <select class="selectpicker show-tick form-control" data-size="5" data-style="droplist-style" data-live-search="true" title="{{__('product.select.option')}}" name="category_id" required>
                         @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
@@ -45,37 +45,37 @@
             <div class="form-group row">
                 <div class="col-sm-5 mb-3 mb-sm-0">
                     <input type="text" class="input-material form-control" name="name" id="name" placeholder="Enter Product Name" required>
-                    <label for="name" class="input-label">Product Name</label>
+                    <label for="name" class="input-label">{{__('product.name')}}</label>
                 </div>
                 <div class="col-sm-5  mb-3 mb-sm-0">
                     <input type="number" class="input-material form-control" id="price" name="price" placeholder="Enter Price" required>
-                    <label for="price" class="input-label">Price</label>
+                    <label for="price" class="input-label">{{__('product.price')}}</label>
                 </div>
                 <div class="col-sm-2 mb-2 mb-sm-0 separate">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="sale_check" name="sale_check" value="Y">
-                        <label class="custom-control-label" for="sale_check">Sale Check</label>
+                        <label class="custom-control-label" for="sale_check">{{__('product.sale.check')}}</label>
                     </div>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-5 mb-3 mb-sm-0">
                     <input type="text" class="input-material form-control" id="model_no" name="model_no" placeholder="Enter Model Number">
-                    <label for="model_no" class="input-label">Model Name</label>
+                    <label for="model_no" class="input-label">{{__('product.model.name')}}</label>
                 </div>
                 <div class="col-sm-5 mb-3 mb-sm-0">
                     <input type="number" class="input-material form-control" id="maintenance_period" name="maintenance_period" placeholder="Enter Maintenance Period (Month)">
-                    <label for="maintenance_period" class="input-label">Maintenance Period (Month)</label>
+                    <label for="maintenance_period" class="input-label">{{__('product.maintenance.period')}}</label>
                 </div>
                 <div class="col-sm-2 mb-2 mb-sm-0 separate">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="device_check" name="device_check" value="Y">
-                        <label class="custom-control-label" for="device_check">Device Check</label>
+                        <label class="custom-control-label" for="device_check">{{__('product.device.check')}}</label>
                     </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block">
-                Create
+                {{__('product.add')}}
             </button>
         </form>
     </div>

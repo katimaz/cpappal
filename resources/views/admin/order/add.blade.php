@@ -51,7 +51,7 @@
             @csrf
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-                    <select id="invoice-type-select" class="selectpicker show-tick form-control" data-size="5" data-style="droplist-style" title="Choose one of the invoice type..." name="invoice_type">
+                    <select id="invoice-type-select" class="selectpicker show-tick form-control" data-size="5" data-style="droplist-style" title="{{__('order.select.option')}}" name="invoice_type">
                         @foreach($order_types as $order_type)
                             @if($order_type->value == "S")
                                 <option value="{{$order_type->value}}" selected>{{$order_type->name}}</option>
@@ -62,7 +62,7 @@
                     </select>
                 </div>
                 <div class="col-sm-6 mb-3 mb-sm-0">
-                    <select id="currency-select" class="selectpicker show-tick form-control" data-size="5" data-style="droplist-style" title="Choose one of the currency..." name="currency_name" required>
+                    <select id="currency-select" class="selectpicker show-tick form-control" data-size="5" data-style="droplist-style" title="{{__('currency.select.option')}}" name="currency_name" required>
                         @foreach($currencies as $currency)
                             <option currency_ratio="{{$currency->ratio}}" value="{{$currency->en_name}}">{{$currency->name."(".$currency->en_name.")"}}</option>
                         @endforeach
@@ -96,14 +96,14 @@
 
             <div class="form-group row">
                 <div class="col-sm-5 mb-3 mb-sm-0">
-                    <select id="customer-select" class="selectpicker show-tick form-control" data-size="5" data-style="droplist-style" data-live-search="true" title="Choose one of the customer..." name="customer_id">
+                    <select id="customer-select" class="selectpicker show-tick form-control" data-size="5" data-style="droplist-style" data-live-search="true" title="{{__('customer.select.option')}}" name="customer_id">
                         @foreach($customers as $customer)
                             <option customer_country_name="{{$customer->country_name}}" customer_name="{{$customer->name}}" customer_address="{{$customer->address}}" customer_delivery_address="{{$customer->delivery_address}}" customer_phone="{{$customer->phone}}" customer_remark="{{$customer->remark}}" value="{{$customer->id}}">{{$customer->name}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-sm-5 mb-3 mb-sm-0">
-                    <select id="country-select"class="selectpicker show-tick form-control" data-size="5" data-style="droplist-style" data-live-search="true" title="Choose one of the country..." name="customer_country_name" required>
+                    <select id="country-select"class="selectpicker show-tick form-control" data-size="5" data-style="droplist-style" data-live-search="true" title="{{__('country.select.option')}}" name="customer_country_name" required>77
                         @foreach($countries as $country)
                             <option value="{{$country->name}}">{{$country->name}}</option>
                         @endforeach

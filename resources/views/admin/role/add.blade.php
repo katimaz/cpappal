@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Create Role</h1>
+        <h1 class="h3 mb-2 text-gray-800">{{__('role.create.title')}}</h1>
         <p class="mb-4"></p>
 
         <form class="user" method="POST" action="{{route('role.create')}}">
@@ -14,14 +14,14 @@
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <input type="text" class="input-material form-control" name="name" id="name" placeholder="Enter Name" required>
-                    <label for="name" class="input-label">Name</label>
+                    <label for="name" class="input-label">{{__('role.name')}}</label>
                 </div>
                 <div class="col-sm-6">
                     <input type="text" class="input-material form-control" id="description" name="description" placeholder="Enter Description" required>
-                    <label for="description" class="input-label">Description</label>
+                    <label for="description" class="input-label">{{__('role.description')}}</label>
                 </div>
             </div>
-            <h1 class="h3 mb-2 text-gray-800">Permissions</h1>
+            <h1 class="h3 mb-2 text-gray-800">{{__('role.permission')}}</h1>
 
             @foreach($permissions as $key => $permission)
                 @if($key % 6 == 0)
@@ -41,7 +41,7 @@
             @endif
             @endforeach
             <button type="submit" class="btn btn-primary btn-block">
-                Create
+                {{__('role.edit')}}
             </button>
         </form>
     </div>

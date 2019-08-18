@@ -13,7 +13,21 @@ return [
     |
     */
     'title' => 'Roles',
+    'create.title' => 'Create Role',
+    'edit.title' => 'Edit Role',
     'admin' => 'Admin',
     'operator' => 'Operator',
     'sales' => 'Sales',
+    'name' => 'Name',
+    'description' => 'Description',
+    'updated.by' => 'Updated By',
+    'updated.time' => 'Updated Time',
+    'action' => 'Action',
+    'delete.title' => 'Delete Role',
+    'delete.description' => 'Delete this role?',
+    'close' => 'Close',
+    'yes' => 'Yes',
+    'add' => 'Add',
+    'edit' => 'Edit',
+    'role.permission' => 'Permission',
 ];

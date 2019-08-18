@@ -11,8 +11,18 @@
 
     <script>
         $(document).ready(function(){
+            var locale = "{{ Session::get('locale')}}"
+            if(locale == 'cn'){
+                $langUrl = '/vendor/datatables/lang/chinese.json';
+            }else{
+                $langUrl = '/vendor/datatables/lang/english.json';
+            }
+
             $('#dataTable').DataTable({
                 "scrollX": true,
+                "language": {
+                    "url": $langUrl
+                },
                 columnDefs: [{
                     orderable: false,
                     targets: [ 7 ]
@@ -34,7 +44,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Customers</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">{{__('customer.title')}}</h6>
                         </div>
                         <div class="card-body">
                             <a style="margin-bottom: 20px" href="{{route('customer.add')}}" class="btn btn-xs btn-success"><i class="fas fa-fw fa-plus-circle"></i></a>
@@ -43,25 +53,25 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Phone</th>
-                                        <th>Remark</th>
-                                        <th>Updated By</th>
-                                        <th>Update Time</th>
-                                        <th>Action</th>
+                                        <th>{{__('customer.name')}}</th>
+                                        <th>{{__('customer.address')}}</th>
+                                        <th>{{__('customer.phone')}}</th>
+                                        <th>{{__('customer.remark')}}</th>
+                                        <th>{{__('customer.updated.by')}}</th>
+                                        <th>{{__('customer.updated.time')}}</th>
+                                        <th>{{__('customer.action')}}</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Phone</th>
-                                        <th>Remark</th>
-                                        <th>Updated By</th>
-                                        <th>Update Time</th>
-                                        <th>Action</th>
+                                        <th>{{__('customer.name')}}</th>
+                                        <th>{{__('customer.address')}}</th>
+                                        <th>{{__('customer.phone')}}</th>
+                                        <th>{{__('customer.remark')}}</th>
+                                        <th>{{__('customer.updated.by')}}</th>
+                                        <th>{{__('customer.updated.time')}}</th>
+                                        <th>{{__('customer.action')}}</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
@@ -91,20 +101,20 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Delete Customer</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">{{__('customer.delete.title')}}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Delete this customer?
+                                {{__('customer.delete.description')}}
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('customer.close')}}</button>
                                 <form method="post" action="{{route('customer.destroy')}}" class="inline">
                                     @csrf
                                     <input type="hidden" id="customer_id" name="id">
-                                    <button type="submit" class="btn btn-danger">Yes</button>
+                                    <button type="submit" class="btn btn-danger">{{__('customer.yes')}}</button>
                                 </form>
                             </div>
                         </div>

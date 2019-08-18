@@ -13,5 +13,18 @@ return [
     |
     */
     'title' => 'Categories',
+    'create.title' => 'Create Category',
+    'edit.title' => 'Edit Category',
+    'name' => 'Name',
+    'priority' => 'Priority',
+    'add' => 'add',
+    'edit' => 'Edit',
+    'updated.time' => 'Updated Time',
+    'updated.by' => 'Updated By',
+    'action' => 'Action',
     'select.option' => 'Choose one of the category...',
+    'delete.title' => 'Delete Category',
+    'delete.description' => 'Delete this category?',
+    'close' => 'Close',
+    'yes' => 'Yes',
 ];

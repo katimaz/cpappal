@@ -17,7 +17,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Edit Customer</h1>
+        <h1 class="h3 mb-2 text-gray-800">{{__('customer.edit.title')}}</h1>
         <p class="mb-4"></p>
         <form method="POST" action="{{route('customer.update')}}">
             @csrf
@@ -36,33 +36,33 @@
                 </div>
                 <div class="col-sm-4 mb-3 mb-sm-0">
                     <input type="text" class="input-material form-control" name="name" id="name" placeholder="Enter Name" value="{{$customer->name}}" required>
-                    <label for="name" class="input-label">Name</label>
+                    <label for="name" class="input-label">{{__('customer.name')}}</label>
                 </div>
                 <div class="col-sm-4">
                     <input type="text" class="input-material form-control" id="phone" name="phone" placeholder="Enter Phone" value="{{$customer->phone}}" required>
-                    <label for="phone" class="input-label">Phone</label>
+                    <label for="phone" class="input-label">{{__('customer.phone')}}</label>
                 </div>
             </div>
             <div class="form-group">
                 <input type="text" class="input-material form-control" id="address" name="address" placeholder="Enter Address" value="{{$customer->address}}" required>
-                <label for="address" class="input-label">Address</label>
+                <label for="address" class="input-label">{{__('customer.address')}}</label>
             </div>
             <div class="form-group" style="margin-bottom: 0rem">
                 <input type="text" class="input-material form-control" id="delivery_address" name="delivery_address" value="{{$customer->delivery_address}}"placeholder="Enter Delivery Address">
-                <label for="delivery_address" class="input-label">Delivery Address</label>
+                <label for="delivery_address" class="input-label">{{__('customer.delivery.address')}}</label>
             </div>
             <div class="form-group">
                 <div class="custom-control custom-checkbox small">
                     <input type="checkbox" class="custom-control-input" id="same_address_check">
-                    <label class="custom-control-label" for="same_address_check">Same as address</label>
+                    <label class="custom-control-label" for="same_address_check">{{__('customer.same.address')}}</label>
                 </div>
             </div>
             <div class="form-group">
                 <input type="text" class="input-material form-control" id="remark" name="remark" placeholder="Enter Remark" value="{{$customer->remark}}">
-                <label for="remark" class="input-label">Remark</label>
+                <label for="remark" class="input-label">{{__('customer.remark')}}</label>
             </div>
             <button type="submit" class="btn btn-primary btn-block">
-                Edit
+                {{__('customer.edit')}}
             </button>
         </form>
     </div>

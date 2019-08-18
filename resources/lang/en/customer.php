@@ -13,10 +13,22 @@ return [
     |
     */
     'title' => 'Customers',
+    'create.title' => 'Create Customer',
+    'edit.title' => 'Edit Customer',
     'name' => 'Customer Name',
     'phone' => 'Customer Phone',
     'address' => 'Address',
     'delivery.address' => 'Delivery Address',
     'remark' => 'Remark',
     'same.address' => 'Same as address',
+    'select.option' => 'Choose one of the customer...',
+    'updated.by' => 'Updated By',
+    'updated.time' => 'Updated Time',
+    'action' => 'Action',
+    'delete.title' => 'Delete Customer',
+    'delete.description' => 'Delete this customer?',
+    'close' => 'Close',
+    'yes' => 'Yes',
+    'add' => 'Add',
+    'edit' => 'Edit',
 ];
