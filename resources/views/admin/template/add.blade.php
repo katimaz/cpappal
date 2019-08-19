@@ -136,7 +136,7 @@
                     <a id="minus_product" style="margin-bottom: 20px;color: white;cursor: pointer;" class="minus_product btn btn-xs btn-danger"><i class="fas fa-fw fa-minus-circle"></i></a>
                 </div>
             </div>
-            <div id="add_product" class="add_product">
+            <div id="add_new_product" class="add_product">
                 <div class="form-group row">
                     <div class="col-sm-4 mb-3 mb-sm-0" style="display: none">
                         <input type="text" class="input-material form-control" id="product_id" name="product_id[]">
@@ -177,7 +177,7 @@
                     </div>
                     <div class="col-sm-2">
                         <a id="insert_sub_product" style="margin-bottom: 20px;color: white;cursor: pointer" class="insert_sub_product btn btn-xs btn-primary"><i class="fas fa-fw fa-plus-circle"></i></a>
-                        <a id="minus_sub_product" style="margin-bottom: 20px;color: white;cursor: pointer;display:none;" class="minus_sub_product btn btn-xs btn-danger"><i class="fas fa-fw fa-minus-circle"></i></a>
+                        <a id="minus_sub_product" style="margin-bottom: 20px;color: white;cursor: pointer;display:none;" class="minus_sub_product btn btn-xs btn-danger" value="0"><i class="fas fa-fw fa-minus-circle"></i></a>
                     </div>
                 </div>
             </div>

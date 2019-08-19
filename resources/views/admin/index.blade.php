@@ -75,7 +75,7 @@
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">{{__('dashboard.stat')}}</h1>
                         {{--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>--}}
                     </div>
 
@@ -88,7 +88,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings ( Today )</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{__('dashboard.earning.today')}}</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">${{number_format($total_day_revenue,2)}}</div>
                                         </div>
                                         <div class="col-auto">
@@ -104,7 +104,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings ( Last 7 Days )</div>
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{{__('dashboard.earning.last.day')}}</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">${{number_format($total_week_revenue,2)}}</div>
                                         </div>
                                         <div class="col-auto">
@@ -120,7 +120,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Earnings ( {{Carbon\Carbon::now()->format('F')}} )</div>
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{{__('dashboard.earning')}} ( {{__('dashboard.'.Carbon\Carbon::now()->format('F'))}} )</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">${{number_format($total_month_revenue,2)}}</div>
                                         </div>
                                         <div class="col-auto">
@@ -136,7 +136,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Earnings</div>
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">{{__('dashboard.earning')}}</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">${{number_format($total_revenue,2)}}</div>
                                         </div>
                                         <div class="col-auto">
@@ -156,7 +156,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Average)</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{__('dashboard.earning.average')}}</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">${{number_format($average_revenue,2)}}</div>
                                         </div>
                                         <div class="col-auto">
@@ -173,7 +173,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Orders</div>
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{{__('order.title')}}</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{$order_count}}</div>
                                         </div>
                                         <div class="col-auto">
@@ -189,7 +189,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Products</div>
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{{__('product.title')}}</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{$product_count}}</div>
                                         </div>
                                         <div class="col-auto">
@@ -205,7 +205,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Customers</div>
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">{{__('customer.title')}}</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{$customer_count}}</div>
                                         </div>
                                         <div class="col-auto">
@@ -222,7 +222,7 @@
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">{{__('dashboard.earning.overview')}}</h6>
                                     <div>
                                         <select id="chart_year" class="form-control chart-select">
                                             <option value="2019" {{Carbon\Carbon::now()->format('Y') == '2019' ? 'selected':''}}>2019</option>
@@ -234,18 +234,18 @@
                                             <option value="2025" {{Carbon\Carbon::now()->format('Y') == '2025' ? 'selected':''}}>2025</option>
                                         </select>
                                         <select id="chart_month" class="form-control chart-select">
-                                            <option value="Jan" {{Carbon\Carbon::now()->format('M') == 'Jan' ? 'selected':''}}>Jan</option>
-                                            <option value="Feb" {{Carbon\Carbon::now()->format('M') == 'Feb' ? 'selected':''}}>Feb</option>
-                                            <option value="Mar" {{Carbon\Carbon::now()->format('M') == 'Mar' ? 'selected':''}}>Mar</option>
-                                            <option value="Apr" {{Carbon\Carbon::now()->format('M') == 'Apr' ? 'selected':''}}>Apr</option>
-                                            <option value="May" {{Carbon\Carbon::now()->format('M') == 'May' ? 'selected':''}}>May</option>
-                                            <option value="Jun" {{Carbon\Carbon::now()->format('M') == 'Jun' ? 'selected':''}}>Jun</option>
-                                            <option value="Jul" {{Carbon\Carbon::now()->format('M') == 'Jul' ? 'selected':''}}>July</option>
-                                            <option value="Aug" {{Carbon\Carbon::now()->format('M') == 'Aug' ? 'selected':''}}>Aug</option>
-                                            <option value="Sep" {{Carbon\Carbon::now()->format('M') == 'Sep' ? 'selected':''}}>Sep</option>
-                                            <option value="Oct" {{Carbon\Carbon::now()->format('M') == 'Oct' ? 'selected':''}}>Oct</option>
-                                            <option value="Nov" {{Carbon\Carbon::now()->format('M') == 'Nov' ? 'selected':''}}>Nov</option>
-                                            <option value="Dec" {{Carbon\Carbon::now()->format('M') == 'Dec' ? 'selected':''}}>Dec</option>
+                                            <option value="Jan" {{Carbon\Carbon::now()->format('M') == 'Jan' ? 'selected':''}}>{{__('dashboard.jan')}}</option>
+                                            <option value="Feb" {{Carbon\Carbon::now()->format('M') == 'Feb' ? 'selected':''}}>{{__('dashboard.feb')}}</option>
+                                            <option value="Mar" {{Carbon\Carbon::now()->format('M') == 'Mar' ? 'selected':''}}>{{__('dashboard.mar')}}</option>
+                                            <option value="Apr" {{Carbon\Carbon::now()->format('M') == 'Apr' ? 'selected':''}}>{{__('dashboard.apr')}}</option>
+                                            <option value="May" {{Carbon\Carbon::now()->format('M') == 'May' ? 'selected':''}}>{{__('dashboard.may')}}</option>
+                                            <option value="Jun" {{Carbon\Carbon::now()->format('M') == 'Jun' ? 'selected':''}}>{{__('dashboard.jun')}}</option>
+                                            <option value="Jul" {{Carbon\Carbon::now()->format('M') == 'Jul' ? 'selected':''}}>{{__('dashboard.jul')}}</option>
+                                            <option value="Aug" {{Carbon\Carbon::now()->format('M') == 'Aug' ? 'selected':''}}>{{__('dashboard.aug')}}</option>
+                                            <option value="Sep" {{Carbon\Carbon::now()->format('M') == 'Sep' ? 'selected':''}}>{{__('dashboard.sep')}}</option>
+                                            <option value="Oct" {{Carbon\Carbon::now()->format('M') == 'Oct' ? 'selected':''}}>{{__('dashboard.oct')}}</option>
+                                            <option value="Nov" {{Carbon\Carbon::now()->format('M') == 'Nov' ? 'selected':''}}>{{__('dashboard.nov')}}</option>
+                                            <option value="Dec" {{Carbon\Carbon::now()->format('M') == 'Dec' ? 'selected':''}}>{{__('dashboard.dec')}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -264,7 +264,7 @@
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-success">Earnings Overview Monthly</h6>
+                                    <h6 class="m-0 font-weight-bold text-success">{{__('dashboard.earning.overview.monthly')}}</h6>
                                     <div>
                                         <select id="chart_monthly_year" class="form-control chart-select">
                                             <option value="2019" {{Carbon\Carbon::now()->format('Y') == '2019' ? 'selected':''}}>2019</option>
