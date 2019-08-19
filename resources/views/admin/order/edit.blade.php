@@ -164,7 +164,7 @@
                 <label for="customer_remark" class="input-label">{{__('customer.remark')}}</label>
             </div>
             <br/>
-            <h1 class="h4 mb-2 text-gray-600">{{__('customer.name')}}</h1>
+            <h1 class="h4 mb-2 text-gray-600">{{__('product.title')}}</h1>
             <p class="mb-4"></p>
             <a id="add" style="margin-bottom: 20px;color: white;cursor: pointer" class="btn btn-xs btn-primary"><i class="fas fa-fw fa-plus-circle"></i></a>
 {{--            <a id="minus" style="margin-bottom: 20px;color: white;cursor: pointer;display:none;" class="btn btn-xs btn-danger"><i class="fas fa-fw fa-minus-circle"></i></a>--}}
