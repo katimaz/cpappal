@@ -306,17 +306,19 @@
                                         data-show-subtext="true">
                                     <option value="" selected disabled hidden>{{__('product.select.option')}}</option>
                                     @foreach($products as $product)
-                                        @if($product->id == $orderSubProduct->sub_product_id)
-                                            <option product_id="{{$product->id}}" product_name="{{$product->name}}"
-                                                    product_model_no="{{$product->model_no}}"
-                                                    product_price="{{$product->price}}" value="{{$product->id}}"
-                                                    data-subtext="{{$product->category_name}}"
-                                                    selected>{{$product->name}}</option>
-                                        @else
-                                            <option product_id="{{$product->id}}" product_name="{{$product->name}}"
-                                                    product_model_no="{{$product->model_no}}"
-                                                    product_price="{{$product->price}}" value="{{$product->id}}"
-                                                    data-subtext="{{$product->category_name}}">{{$product->name}}</option>
+                                        @if($orderSubProduct->sub_product_category_id == $product->product_category_id)
+                                            @if($product->id == $orderSubProduct->sub_product_id)
+                                                <option product_id="{{$product->id}}" product_name="{{$product->name}}"
+                                                        product_model_no="{{$product->model_no}}"
+                                                        product_price="{{$product->price}}" value="{{$product->id}}"
+                                                        data-subtext="{{$product->category_name}}"
+                                                        selected>{{$product->name}}</option>
+                                            @else
+                                                <option product_id="{{$product->id}}" product_name="{{$product->name}}"
+                                                        product_model_no="{{$product->model_no}}"
+                                                        product_price="{{$product->price}}" value="{{$product->id}}"
+                                                        data-subtext="{{$product->category_name}}">{{$product->name}}</option>
+                                            @endif
                                         @endif
                                     @endforeach
                                 </select>

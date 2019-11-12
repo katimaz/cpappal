@@ -191,7 +191,7 @@
                             @foreach($products as $product)
                                 @if($product->id == $order->product_id)
                                     <option product_id="{{$product->id}}" product_name="{{$product->name}}" product_model_no="{{$product->model_no}}" product_price="{{$product->price}}" value="{{$product->id}}" data-subtext="{{$product->category_name}}" selected>{{$product->name}}</option>
-                                @else
+                                @elseif($product->category_id == $order->product_category_id)
                                     <option product_id="{{$product->id}}" product_name="{{$product->name}}" product_model_no="{{$product->model_no}}" product_price="{{$product->price}}" value="{{$product->id}}" data-subtext="{{$product->category_name}}">{{$product->name}}</option>
                                 @endif
                             @endforeach
@@ -288,7 +288,7 @@
                                     @foreach($products as $product)
                                         @if($product->id == $orderSubProduct->sub_product_id)
                                             <option product_id="{{$product->id}}" product_name="{{$product->name}}" product_model_no="{{$product->model_no}}" product_price="{{$product->price}}" value="{{$product->id}}" data-subtext="{{$product->category_name}}" selected>{{$product->name}}</option>
-                                        @else
+                                        @elseif($product->category_id == $orderSubProduct->sub_product_category_id)
                                             <option product_id="{{$product->id}}" product_name="{{$product->name}}" product_model_no="{{$product->model_no}}" product_price="{{$product->price}}" value="{{$product->id}}" data-subtext="{{$product->category_name}}">{{$product->name}}</option>
                                         @endif
                                     @endforeach
