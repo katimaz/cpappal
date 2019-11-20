@@ -65,12 +65,16 @@ class OrderController extends Controller
         }
         $order = Order::createOrder($request,$customer_id);
 
-        for($i = 0 ;$i <count($request->ui_product_id); $i++){
-            $orderProduct = OrderProduct::createOrderProduct($request,$order->id,$i);
+        if(!empty($request->ui_product_id)) {
+            for ($i = 0; $i < count($request->ui_product_id); $i++) {
+                $orderProduct = OrderProduct::createOrderProduct($request, $order->id, $i);
 
-            for($y = 0 ;$y <count($request->ui_sub_product_id); $y++){
-                if($request->ui_product_id[$i] == $request->ui_sub_product_id[$y]){
-                    OrderSubProduct::createOrderSubProduct($request,$orderProduct->id,$y);
+                if (!empty($request->ui_sub_product_id)) {
+                    for ($y = 0; $y < count($request->ui_sub_product_id); $y++) {
+                        if ($request->ui_product_id[$i] == $request->ui_sub_product_id[$y]) {
+                            OrderSubProduct::createOrderSubProduct($request, $orderProduct->id, $y);
+                        }
+                    }
                 }
             }
         }
@@ -187,8 +191,8 @@ class OrderController extends Controller
             OrderSubProduct::where('order_product_id',$orderProduct->id)->delete();
         }
         OrderProduct::where('order_id',$request->order_id)->delete();
-
-        for($i = 0 ;$i <count($request->ui_product_id); $i++) {
+        if(!empty($request->ui_product_id)) {
+            for ($i = 0; $i < count($request->ui_product_id); $i++) {
 //            if($request->order_productsid[$i] == null){
                 $orderProduct = new OrderProduct();
                 $orderProduct->order_id = $order->id;
@@ -202,19 +206,21 @@ class OrderController extends Controller
                 $orderProduct->product_remark = $request->product_remark[$i];
                 $orderProduct->save();
 
-                for ($y = 0; $y < count($request->ui_sub_product_id); $y++) {
-                    if ($request->ui_product_id[$i] == $request->ui_sub_product_id[$y]) {
-                        $orderSubProduct = new OrderSubProduct();
-                        $orderSubProduct->order_product_id = $orderProduct->id;
-                        $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
-                        $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
-                        $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
-                        $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
-                        $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
-                        $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
-                        $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
-                        $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
-                        $orderSubProduct->save();
+                if (!empty($request->ui_sub_product_id)) {
+                    for ($y = 0; $y < count($request->ui_sub_product_id); $y++) {
+                        if ($request->ui_product_id[$i] == $request->ui_sub_product_id[$y]) {
+                            $orderSubProduct = new OrderSubProduct();
+                            $orderSubProduct->order_product_id = $orderProduct->id;
+                            $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
+                            $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
+                            $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
+                            $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
+                            $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
+                            $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
+                            $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
+                            $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
+                            $orderSubProduct->save();
+                        }
                     }
                 }
 //            }
@@ -261,6 +267,7 @@ class OrderController extends Controller
 //                    }
 //                }
 //            }
+            }
         }
         return redirect()->route('order')->with('success', true)->with('message','Order updated successfully!');
     }
