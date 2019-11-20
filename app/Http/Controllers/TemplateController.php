@@ -67,33 +67,37 @@ class TemplateController extends Controller
         $order->total_price = $request->order_total_price;
         $order->save();
 
-        for($i = 0 ;$i <count($request->ui_product_id); $i++){
-            $orderProduct = new TemplateOrderProduct();
-            $orderProduct->order_id = $order->id;
-            $orderProduct->product_id = $request->product_id[$i];
-            $orderProduct->product_name = $request->product_name[$i];
-            $orderProduct->product_model_no = $request->product_model_no[$i];
-            $orderProduct->product_price = $request->product_price[$i];
-            $orderProduct->product_quantity = $request->product_quantity[$i];
-            $orderProduct->product_total_price = $request->product_total_price[$i];
-            $orderProduct->product_serial_no = $request->product_serial_no[$i];
-            $orderProduct->product_remark = $request->product_remark[$i];
-            $orderProduct->save();
+        if(!empty($request->ui_product_id)) {
+            for ($i = 0; $i < count($request->ui_product_id); $i++) {
+                $orderProduct = new TemplateOrderProduct();
+                $orderProduct->order_id = $order->id;
+                $orderProduct->product_id = $request->product_id[$i];
+                $orderProduct->product_name = $request->product_name[$i];
+                $orderProduct->product_model_no = $request->product_model_no[$i];
+                $orderProduct->product_price = $request->product_price[$i];
+                $orderProduct->product_quantity = $request->product_quantity[$i];
+                $orderProduct->product_total_price = $request->product_total_price[$i];
+                $orderProduct->product_serial_no = $request->product_serial_no[$i];
+                $orderProduct->product_remark = $request->product_remark[$i];
+                $orderProduct->save();
 
-            for($y = 0 ;$y <count($request->ui_sub_product_id); $y++){
-                if($request->ui_product_id[$i] == $request->ui_sub_product_id[$y]){
-                    $orderSubProduct = new TemplateOrderSubProduct();
-                    $orderSubProduct->order_product_id = $orderProduct->id;
-                    $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
-                    $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
-                    $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
-                    $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
-                    $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
-                    $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
-                    $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
-                    $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
-                    $orderSubProduct->save();
+                if(!empty($request->ui_sub_product_id)) {
+                    for ($y = 0; $y < count($request->ui_sub_product_id); $y++) {
+                        if ($request->ui_product_id[$i] == $request->ui_sub_product_id[$y]) {
+                            $orderSubProduct = new TemplateOrderSubProduct();
+                            $orderSubProduct->order_product_id = $orderProduct->id;
+                            $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
+                            $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
+                            $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
+                            $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
+                            $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
+                            $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
+                            $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
+                            $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
+                            $orderSubProduct->save();
 //                    array_splice($request->sub_product_category_id,$y)
+                        }
+                    }
                 }
             }
         }
@@ -158,74 +162,80 @@ class TemplateController extends Controller
         $order->total_price = $request->order_total_price;
         $order->save();
 
-        for($i = 0 ;$i <count($request->ui_product_id); $i++) {
-            if($request->order_productsid[$i] == null){
-                $orderProduct = new TemplateOrderProduct();
-                $orderProduct->order_id = $order->id;
-                $orderProduct->product_id = $request->product_id[$i];
-                $orderProduct->product_name = $request->product_name[$i];
-                $orderProduct->product_model_no = $request->product_model_no[$i];
-                $orderProduct->product_price = $request->product_price[$i];
-                $orderProduct->product_quantity = $request->product_quantity[$i];
-                $orderProduct->product_total_price = $request->product_total_price[$i];
-                $orderProduct->product_serial_no = $request->product_serial_no[$i];
-                $orderProduct->product_remark = $request->product_remark[$i];
-                $orderProduct->save();
+        if(!empty($request->ui_product_id)) {
+            for ($i = 0; $i < count($request->ui_product_id); $i++) {
+                if ($request->order_productsid[$i] == null) {
+                    $orderProduct = new TemplateOrderProduct();
+                    $orderProduct->order_id = $order->id;
+                    $orderProduct->product_id = $request->product_id[$i];
+                    $orderProduct->product_name = $request->product_name[$i];
+                    $orderProduct->product_model_no = $request->product_model_no[$i];
+                    $orderProduct->product_price = $request->product_price[$i];
+                    $orderProduct->product_quantity = $request->product_quantity[$i];
+                    $orderProduct->product_total_price = $request->product_total_price[$i];
+                    $orderProduct->product_serial_no = $request->product_serial_no[$i];
+                    $orderProduct->product_remark = $request->product_remark[$i];
+                    $orderProduct->save();
 
-                for ($y = 0; $y < count($request->ui_sub_product_id); $y++) {
-                    if ($request->ui_product_id[$i] == $request->ui_sub_product_id[$y]) {
-                        $orderSubProduct = new TemplateOrderSubProduct();
-                        $orderSubProduct->order_product_id = $orderProduct->id;
-                        $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
-                        $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
-                        $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
-                        $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
-                        $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
-                        $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
-                        $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
-                        $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
-                        $orderSubProduct->save();
+                    if(!empty($request->ui_sub_product_id)) {
+                        for ($y = 0; $y < count($request->ui_sub_product_id); $y++) {
+                            if ($request->ui_product_id[$i] == $request->ui_sub_product_id[$y]) {
+                                $orderSubProduct = new TemplateOrderSubProduct();
+                                $orderSubProduct->order_product_id = $orderProduct->id;
+                                $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
+                                $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
+                                $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
+                                $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
+                                $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
+                                $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
+                                $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
+                                $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
+                                $orderSubProduct->save();
+                            }
+                        }
                     }
-                }
-            }else{
-                $orderProduct = TemplateOrderProduct::find($request->order_productsid[$i]);
-                $orderProduct->order_id = $order->id;
-                $orderProduct->product_id = $request->product_id[$i];
-                $orderProduct->product_name = $request->product_name[$i];
-                $orderProduct->product_model_no = $request->product_model_no[$i];
-                $orderProduct->product_price = $request->product_price[$i];
-                $orderProduct->product_quantity = $request->product_quantity[$i];
-                $orderProduct->product_total_price = $request->product_total_price[$i];
-                $orderProduct->product_serial_no = $request->product_serial_no[$i];
-                $orderProduct->product_remark = $request->product_remark[$i];
-                $orderProduct->save();
+                } else {
+                    $orderProduct = TemplateOrderProduct::find($request->order_productsid[$i]);
+                    $orderProduct->order_id = $order->id;
+                    $orderProduct->product_id = $request->product_id[$i];
+                    $orderProduct->product_name = $request->product_name[$i];
+                    $orderProduct->product_model_no = $request->product_model_no[$i];
+                    $orderProduct->product_price = $request->product_price[$i];
+                    $orderProduct->product_quantity = $request->product_quantity[$i];
+                    $orderProduct->product_total_price = $request->product_total_price[$i];
+                    $orderProduct->product_serial_no = $request->product_serial_no[$i];
+                    $orderProduct->product_remark = $request->product_remark[$i];
+                    $orderProduct->save();
 
-                for ($y = 0; $y < count($request->ui_sub_product_id); $y++) {
-                    if ($request->ui_product_id[$i] == $request->ui_sub_product_id[$y]) {
-                        if($request->sub_product_db_id[$y] == null){
-                            $orderSubProduct = new TemplateOrderSubProduct();
-                            $orderSubProduct->order_product_id = $orderProduct->id;
-                            $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
-                            $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
-                            $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
-                            $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
-                            $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
-                            $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
-                            $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
-                            $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
-                            $orderSubProduct->save();
-                        }else{
-                            $orderSubProduct = TemplateOrderSubProduct::find($request->sub_product_db_id[$y]);
-                            $orderSubProduct->order_product_id = $orderProduct->id;
-                            $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
-                            $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
-                            $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
-                            $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
-                            $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
-                            $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
-                            $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
-                            $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
-                            $orderSubProduct->save();
+                    if(!empty($request->ui_sub_product_id)) {
+                        for ($y = 0; $y < count($request->ui_sub_product_id); $y++) {
+                            if ($request->ui_product_id[$i] == $request->ui_sub_product_id[$y]) {
+                                if ($request->sub_product_db_id[$y] == null) {
+                                    $orderSubProduct = new TemplateOrderSubProduct();
+                                    $orderSubProduct->order_product_id = $orderProduct->id;
+                                    $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
+                                    $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
+                                    $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
+                                    $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
+                                    $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
+                                    $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
+                                    $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
+                                    $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
+                                    $orderSubProduct->save();
+                                } else {
+                                    $orderSubProduct = TemplateOrderSubProduct::find($request->sub_product_db_id[$y]);
+                                    $orderSubProduct->order_product_id = $orderProduct->id;
+                                    $orderSubProduct->sub_product_id = $request->sub_product_id[$y];
+                                    $orderSubProduct->sub_product_name = $request->sub_product_name[$y];
+                                    $orderSubProduct->sub_product_quantity = $request->sub_product_quantity[$y];
+                                    $orderSubProduct->sub_product_price = $request->sub_product_price[$y];
+                                    $orderSubProduct->sub_product_total_price = $request->sub_product_total_price[$y];
+                                    $orderSubProduct->sub_product_model_no = $request->sub_product_model_no[$y];
+                                    $orderSubProduct->sub_product_serial_no = $request->sub_product_serial_no[$y];
+                                    $orderSubProduct->sub_product_remark = $request->sub_product_remark[$y];
+                                    $orderSubProduct->save();
+                                }
+                            }
                         }
                     }
                 }

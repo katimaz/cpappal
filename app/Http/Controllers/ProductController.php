@@ -192,14 +192,16 @@ class ProductController extends Controller
             ->get();
 
         $productDetailsArray = [];
-        for ($i = 0 ; $i<count($productDetails);$i++) {
-            $temp = [];
-            array_push($temp,$productDetails[$i]->id);
-            array_push($temp,$productDetails[$i]->purchase_date);
-            array_push($temp,$productDetails[$i]->purchase_name);
-            array_push($temp,$productDetails[$i]->purchase_price);
-            array_push($temp,$productDetails[$i]->purchase_quantity);
-            array_push($productDetailsArray,$temp);
+        if(!empty($productDetails)) {
+            for ($i = 0; $i < count($productDetails); $i++) {
+                $temp = [];
+                array_push($temp, $productDetails[$i]->id);
+                array_push($temp, $productDetails[$i]->purchase_date);
+                array_push($temp, $productDetails[$i]->purchase_name);
+                array_push($temp, $productDetails[$i]->purchase_price);
+                array_push($temp, $productDetails[$i]->purchase_quantity);
+                array_push($productDetailsArray, $temp);
+            }
         }
 
         return Response::json(array('success'=>true,'data'=>$productDetailsArray));
