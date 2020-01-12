@@ -21,7 +21,7 @@
                     <label for="description" class="input-label">{{__('role.description')}}</label>
                 </div>
             </div>
-            <h1 class="h3 mb-2 text-gray-800">{{__('role.permission')}}</h1>
+            <h1 class="h3 mb-2 text-gray-800">{{__('role.role.permission')}}</h1>
 
             @foreach($permissions as $key => $permission)
                 @if($key % 6 == 0)
