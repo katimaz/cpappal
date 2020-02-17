@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
-
+use Config;
 class AdminController extends Controller
 {
     public function __construct()
@@ -19,6 +19,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+        session()->put('locale', Config::get('app.locale'));
         $total_revenue = DB::table('orders')->sum('total_price');
         $total_month_revenue = DB::table('orders')->whereMonth('created_at',Carbon::now()->month)->sum('total_price');
         $total_week_revenue = DB::table('orders')->where('created_at','>=',Carbon::now()->subDays(7))->sum('total_price');
