@@ -13,6 +13,7 @@ use DB;
 use Session;
 use App\Country;
 use App\Currency;
+use Response;
 
 class OrderController extends Controller
 {
@@ -27,9 +28,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = DB::table('orders')->get();
-
+        $orders = DB::table('orders')->orderBy('created_at','desc')->get();
         return view('admin.order.index',compact('orders'));
+    }
+
+    public function getOrders(){
+
     }
 
     /**

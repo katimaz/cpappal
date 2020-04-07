@@ -30,6 +30,7 @@
                     orderable: false,
                     targets: [ 7 ]
                 }],
+                "ajax": "order/getOrders",
                 "order": [[ 6, "desc" ]]
             });
 
@@ -41,6 +42,7 @@
 @stop
 
 @section('content')
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -77,29 +79,29 @@
                                         <th>Action</th>
                                     </tr>
                                     </tfoot>
-                                    <tbody>
+                                    {{--<tbody>--}}
 
-                                    @foreach($orders as $order)
-                                        <tr>
-                                            @if($order->order_type != "S")
-                                                <td>{{$order->order_no.$order->order_type.$order->separate}}</td>
-                                            @else
-                                                <td>{{$order->order_no.$order->separate}}</td>
-                                            @endif
-                                            <td>{{$order->order_date}}</td>
-                                            <td>{{$order->customer_name}}</td>
-                                            <td>{{$order->customer_phone}}</td>
-                                            <td>${{number_format($order->total_price,2)}}</td>
-                                            <td>{{$order->created_by}}</td>
-                                            <td>{{$order->created_at}}</td>
-                                            <td>
-                                                <a style="margin: 2px" href="{{route('export', [$order->id])}}" class="btn btn-xs btn-info"><i class="fas fa-fw fa-download"></i></a>
-                                                <a style="margin: 2px" href="{{route('order.edit', [$order->id])}}" class="btn btn-xs btn-primary"><i class="fas fa-fw fa-edit"></i></a>
-                                                <a style="margin: 2px" href id="{{$order->id}}" data-toggle="modal" data-target="#destoryModal" class="btn btn-xs btn-danger delete"><i class="fas fa-fw fa-trash"></i></a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
+                                    {{--@foreach($orders as $order)--}}
+                                        {{--<tr>--}}
+                                            {{--@if($order->order_type != "S")--}}
+                                                {{--<td>{{$order->order_no.$order->order_type.$order->separate}}</td>--}}
+                                            {{--@else--}}
+                                                {{--<td>{{$order->order_no.$order->separate}}</td>--}}
+                                            {{--@endif--}}
+                                            {{--<td>{{$order->order_date}}</td>--}}
+                                            {{--<td>{{$order->customer_name}}</td>--}}
+                                            {{--<td>{{$order->customer_phone}}</td>--}}
+                                            {{--<td>${{number_format($order->total_price,2)}}</td>--}}
+                                            {{--<td>{{$order->created_by}}</td>--}}
+                                            {{--<td>{{$order->created_at}}</td>--}}
+                                            {{--<td>--}}
+                                                {{--<a style="margin: 2px" href="{{route('export', [$order->id])}}" class="btn btn-xs btn-info"><i class="fas fa-fw fa-download"></i></a>--}}
+                                                {{--<a style="margin: 2px" href="{{route('order.edit', [$order->id])}}" class="btn btn-xs btn-primary"><i class="fas fa-fw fa-edit"></i></a>--}}
+                                                {{--<a style="margin: 2px" href id="{{$order->id}}" data-toggle="modal" data-target="#destoryModal" class="btn btn-xs btn-danger delete"><i class="fas fa-fw fa-trash"></i></a>--}}
+                                            {{--</td>--}}
+                                        {{--</tr>--}}
+                                    {{--@endforeach--}}
+                                    {{--</tbody>--}}
                                 </table>
                             </div>
                         </div>

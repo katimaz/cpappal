@@ -26,7 +26,8 @@
                 columnDefs: [{
                     orderable: false,
                     targets: [ 7 ]
-                }]
+                }],
+                "order": [[ 0, "desc" ]]
             });
 
             $('.delete').on('click', function(e) {
