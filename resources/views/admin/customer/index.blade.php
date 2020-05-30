@@ -18,21 +18,41 @@
                 $langUrl = '/vendor/datatables/lang/english.json';
             }
 
-            $('#dataTable').DataTable({
+            var table = $('#dataTable').DataTable({
                 "scrollX": true,
+                "ajax": "customer/getCustomers",
                 "language": {
                     "url": $langUrl
                 },
-                columnDefs: [{
-                    orderable: false,
-                    targets: [ 7 ]
-                }],
-                "order": [[ 0, "desc" ]]
+                "order": [] ,
+                "columns": [
+                    { "data": "id" },
+                    { "data": "name" },
+                    { "data": "address" },
+                    { "data": "phone" },
+                    { "data": "remark" },
+                    { "data": "updated_by" },
+                    { "data": "updated_at" },
+                    {
+                        "targets": -1,
+                        "data": null,
+                        "defaultContent": "<a style='margin: 2px' href='' class='btn btn-xs btn-primary edit'><i class='fas fa-fw fa-edit edit'></i></a><a style='margin: 2px' href id='' data-toggle='modal' data-target='#destoryModal' class='btn btn-xs btn-danger delete'><i class='fas fa-fw fa-trash'></i></a>"
+                    }
+                ]
             });
 
-            $('.delete').on('click', function(e) {
-               $('#customer_id').val(this.id);
+            $('#dataTable tbody').on('click', 'a.edit', function () {
+                var data = table.row($(this).parents('tr')).data();
+                $(this).attr("href", 'customer/edit/' + data['id']);
+                $("a.edit").click();
             });
+
+            $('#dataTable tbody').on('click', 'a.delete', function () {
+                var data = table.row($(this).parents('tr')).data();
+                $(this).attr("href", 'customer/edit/' + data['id']);
+                $('#customer_id').val(data['id']);
+            });
+
         });
     </script>
 @stop
@@ -75,24 +95,6 @@
                                         <th>{{__('customer.action')}}</th>
                                     </tr>
                                     </tfoot>
-                                    <tbody>
-
-                                    @foreach($customers as $customer)
-                                        <tr>
-                                            <td>{{$customer->id}}</td>
-                                            <td>{{$customer->name}}</td>
-                                            <td>{{$customer->address}}</td>
-                                            <td>{{$customer->phone}}</td>
-                                            <td>{{$customer->remark}}</td>
-                                            <td>{{$customer->updated_by}}</td>
-                                            <td>{{$customer->updated_at}}</td>
-                                            <td>
-                                                <a style="margin: 2px" href="{{route('customer.edit', [$customer->id])}}" class="btn btn-xs btn-primary"><i class="fas fa-fw fa-edit"></i></a>
-                                                <a style="margin: 2px" href id="{{$customer->id}}" data-toggle="modal" data-target="#destoryModal" class="btn btn-xs btn-danger delete"><i class="fas fa-fw fa-trash"></i></a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
                                 </table>
                             </div>
                         </div>

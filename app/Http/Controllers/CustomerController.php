@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Country;
 use Illuminate\Http\Request;
 use App\Customer;
+use Response;
+use DB;
 
 class CustomerController extends Controller
 {
@@ -21,6 +23,14 @@ class CustomerController extends Controller
     {
         $customers = Customer::all()->sortByDesc("id");
         return view('admin.customer.index',compact('customers'));
+    }
+
+    public function getCustomers(){
+
+        $customers = DB::table('customers')->select('id','name','phone','address','remark','updated_by','updated_at')->orderBy("id",'desc')->get();
+        $Response = ['data' => $customers];
+
+        return Response::json($Response);
     }
 
     /**

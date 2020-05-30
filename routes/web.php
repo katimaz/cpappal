@@ -38,6 +38,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/customer/update', 'CustomerController@update')->name('customer.update');
     Route::post('/customer/destroy', 'CustomerController@destroy')->name('customer.destroy');
 
+    Route::get('/customer/getCustomers', 'CustomerController@getCustomers')->name('customer.getCustomers');
+
     Route::get('/product', 'ProductController@index')->name('product')->middleware('can:hasProductAccess,App\User');
     Route::get('/product/add', 'ProductController@add')->name('product.add');
     Route::post('/product/create', 'ProductController@create')->name('product.create');
@@ -60,7 +62,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/order/destroy', 'OrderController@destroy')->name('order.destroy');
 
     Route::get('/order/getOrders', 'OrderController@getOrders')->name('order.getOrders');
-	Route::get('/order/testOrders', 'OrderController@testOrders')->name('order.testOrders');
+	//Route::get('/order/testOrders', 'OrderController@testOrders')->name('order.testOrders');
 
     Route::get('/order/template/{id}', 'OrderController@template')->name('order.template');
 
