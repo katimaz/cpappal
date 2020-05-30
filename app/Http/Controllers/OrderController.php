@@ -28,12 +28,21 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = DB::table('orders')->orderBy('created_at','desc')->get();
-        return view('admin.order.index',compact('orders'));
+        //$orders = DB::table('orders')->orderBy('created_at','desc')->get();
+        //return view('admin.order.index',compact('orders'));
+		return view('admin.order.index');
     }
 
     public function getOrders(){
-
+		
+		$orders = DB::table('orders')->select('id','order_no','order_date','customer_name','customer_phone','total_price','created_at','updated_at')->orderBy('created_at','desc')->get();
+		$Response = ['data' => $orders];
+		
+        return  Response::json($Response);
+    }
+	
+	public function testOrders(){
+        return view('admin.order.indextest');
     }
 
     /**

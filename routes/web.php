@@ -59,6 +59,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/order/update', 'OrderController@update')->name('order.update');
     Route::post('/order/destroy', 'OrderController@destroy')->name('order.destroy');
 
+    Route::get('/order/getOrders', 'OrderController@getOrders')->name('order.getOrders');
+	Route::get('/order/testOrders', 'OrderController@testOrders')->name('order.testOrders');
+
     Route::get('/order/template/{id}', 'OrderController@template')->name('order.template');
 
     Route::get('/template', 'TemplateController@index')->name('template')->middleware('can:hasTemplateAccess,App\User');;

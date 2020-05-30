@@ -21,22 +21,49 @@
                 $langUrl = '/vendor/datatables/lang/english.json';
             }
 
-            $('#dataTable').DataTable({
-                "scrollX": true,
+           var table = $('#dataTable').DataTable({
+			   "scrollX": true,
+				"ajax": "order/getOrders",
                 "language": {
                     "url": $langUrl
                 },
-                columnDefs: [{
-                    orderable: false,
-                    targets: [ 7 ]
-                }],
-                "order": [[ 6, "desc" ]]
+				"order": [] ,
+                "columns": [
+					{ "data": "order_no" },
+					{ "data": "order_date" },
+					{ "data": "customer_name" },
+					{ "data": "customer_phone" },
+					{ "data": "total_price" },
+					{ "data": "created_at" },
+					{ "data": "updated_at" },
+					{
+						"targets": -1,
+						"data": null,
+						"defaultContent": "<a style='margin: 2px' href='' class='btn btn-xs btn-info download'><i class='fas fa-fw fa-download'></i></a><a style='margin: 2px' href='' class='btn btn-xs btn-primary edit'><i class='fas fa-fw fa-edit edit'></i></a><a style='margin: 2px' href id='' data-toggle='modal' data-target='#destoryModal' class='btn btn-xs btn-danger delete'><i class='fas fa-fw fa-trash'></i></a>"
+					}
+				]
             });
+			  
+			$('#dataTable tbody').on('click', 'a.download', function () {
+				var data = table.row($(this).parents('tr')).data();
+				$(this).attr("href", '/admin/export/' + data['id']);
+				$("a.download").click();
+			});
 
-            $('.delete').on('click', function(e) {
-               $('#order_id').val(this.id);
-            });
-        });
+			$('#dataTable tbody').on('click', 'a.edit', function () {
+				var data = table.row($(this).parents('tr')).data();
+				$(this).attr("href", 'order/edit/' + data['id']);
+				$("a.edit").click();
+			});
+			
+			$('#dataTable tbody').on('click', 'a.delete', function () {
+				var data = table.row($(this).parents('tr')).data();
+				$(this).attr("href", 'order/edit/' + data['id']);
+				$('#order_id').val(data['id']);
+			});
+			
+		});
+		
     </script>
 @stop
 
@@ -53,7 +80,7 @@
                             <a style="margin-bottom: 20px" href="{{route('order.add')}}" class="btn btn-xs btn-success"><i class="fas fa-fw fa-plus-circle"></i></a>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+									<thead>
                                     <tr>
                                         <th>#</th>
                                         <th>{{__('order.order.date')}}</th>
@@ -68,38 +95,15 @@
                                     <tfoot>
                                     <tr>
                                         <th>#</th>
-                                        <th>Order Date</th>
-                                        <th>Customer Name</th>
-                                        <th>Customer Phone</th>
-                                        <th>Price</th>
-                                        <th>Created By</th>
-                                        <th>Created Time</th>
-                                        <th>Action</th>
+                                        <th>{{__('order.order.date')}}</th>
+                                        <th>{{__('customer.name')}}</th>
+                                        <th>{{__('customer.phone')}}</th>
+                                        <th>{{__('order.price')}}</th>
+                                        <th>{{__('order.created.by')}}</th>
+                                        <th>{{__('order.created.time')}}</th>
+                                        <th>{{__('order.action')}}</th>
                                     </tr>
                                     </tfoot>
-                                    <tbody>
-
-                                    @foreach($orders as $order)
-                                        <tr>
-                                            @if($order->order_type != "S")
-                                                <td>{{$order->order_no.$order->order_type.$order->separate}}</td>
-                                            @else
-                                                <td>{{$order->order_no.$order->separate}}</td>
-                                            @endif
-                                            <td>{{$order->order_date}}</td>
-                                            <td>{{$order->customer_name}}</td>
-                                            <td>{{$order->customer_phone}}</td>
-                                            <td>${{number_format($order->total_price,2)}}</td>
-                                            <td>{{$order->created_by}}</td>
-                                            <td>{{$order->created_at}}</td>
-                                            <td>
-                                                <a style="margin: 2px" href="{{route('export', [$order->id])}}" class="btn btn-xs btn-info"><i class="fas fa-fw fa-download"></i></a>
-                                                <a style="margin: 2px" href="{{route('order.edit', [$order->id])}}" class="btn btn-xs btn-primary"><i class="fas fa-fw fa-edit"></i></a>
-                                                <a style="margin: 2px" href id="{{$order->id}}" data-toggle="modal" data-target="#destoryModal" class="btn btn-xs btn-danger delete"><i class="fas fa-fw fa-trash"></i></a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
                                 </table>
                             </div>
                         </div>
