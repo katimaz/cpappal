@@ -35,7 +35,7 @@ class OrderController extends Controller
 
     public function getOrders(){
 
-		$orders = DB::table('orders')->select('id','order_no','order_date','customer_name','customer_phone','total_price','created_at','updated_at')->orderBy('created_at','desc')->get();
+		$orders = DB::table('orders')->select('id',DB::raw("CASE WHEN order_type = 'S' THEN CONCAT(COALESCE(orders.order_no,''),COALESCE(orders.separate,'')) ELSE CONCAT(COALESCE(orders.order_no,''),COALESCE(orders.order_type,''),COALESCE(orders.separate,'')) END  AS order_no"),'order_date','customer_name','customer_phone','total_price','created_at','updated_at')->orderBy('created_at','desc')->get();
 		$Response = ['data' => $orders];
 
         return  Response::json($Response);

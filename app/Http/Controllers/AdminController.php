@@ -21,7 +21,7 @@ class AdminController extends Controller
     {
         session()->put('locale', Config::get('app.locale'));
         $total_revenue = DB::table('orders')->sum('total_price');
-        $total_month_revenue = DB::table('orders')->whereMonth('created_at',Carbon::now()->month)->sum('total_price');
+        $total_month_revenue = DB::table('orders')->whereMonth('created_at',Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->sum('total_price');
         $total_week_revenue = DB::table('orders')->where('created_at','>=',Carbon::now()->subDays(7))->sum('total_price');
         $total_day_revenue = DB::table('orders')->where('created_at','>=',Carbon::today()->toDateString())->sum('total_price');
         $product_count = DB::table('products')->count();
