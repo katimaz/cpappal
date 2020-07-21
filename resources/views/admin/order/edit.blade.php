@@ -84,9 +84,9 @@
                 </div>
                 <div class="col-sm-4 mb-3 mb-sm-0">
                     @if(is_null($orders[0]->order_no))
-                        <input type="text" class="input-material form-control" name="invoice_number" id="invoice_number" placeholder="Enter Invoice Number" value="{{$max_order_no == null?'50000':$max_order_no+1}}" required>
+                        <input type="text" class="input-material form-control" name="invoice_number" id="invoice_number" placeholder="Enter Invoice Number" value="{{$max_order_no == null?'50000':$max_order_no+1}}" oninput="OnlyNumber(this)" required>
                     @else
-                        <input type="text" class="input-material form-control" name="invoice_number" id="invoice_number" placeholder="Enter Invoice Number" value="{{$orders[0]->order_no}}" required>
+                        <input type="text" class="input-material form-control" name="invoice_number" id="invoice_number" placeholder="Enter Invoice Number" value="{{$orders[0]->order_no}}" oninput="OnlyNumber(this)" required>
                     @endif
 
                     <label for="invoice_number" class="input-label">{{__('order.invoice.number')}}</label>

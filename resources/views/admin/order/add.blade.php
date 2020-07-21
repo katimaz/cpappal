@@ -76,7 +76,7 @@
                     <label for="invoice_date" class="input-label">{{__('order.invoice.date')}}</label>
                 </div>
                 <div class="col-sm-4 mb-3 mb-sm-0">
-                    <input type="text" class="input-material form-control" name="invoice_number" id="invoice_number" placeholder="Enter Invoice Number" value="{{$max_order_no == null?'50000':$max_order_no+1}}" required>
+                    <input type="text" class="input-material form-control" name="invoice_number" id="invoice_number" placeholder="Enter Invoice Number" value="{{$max_order_no == null?'50000':$max_order_no+1}}" oninput="OnlyNumber(this)" required>
                     <label for="invoice_number" class="input-label">{{__('order.invoice.number')}}</label>
                 </div>
                 <div class="col-sm-2 mb-3 mb-sm-0">

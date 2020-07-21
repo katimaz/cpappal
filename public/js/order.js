@@ -307,11 +307,11 @@ $('#invoice_date').datepicker({
 if (!order_date) {
     $('#invoice_date').datepicker('setDate', new Date());
 }
-
+/*
 $( "#invoice_number" ).keypress(function(event) {
     return validateNumber(event);
 });
-
+*/
 $("#invoice_date").keypress(function(event) {
     return false;
 });
@@ -323,7 +323,12 @@ function sum_price() {
     });
     return sum.toFixed(2);
 }
-
+function OnlyNumber(input){
+  let value = input.value;
+  let numbers = value.replace(/[^0-9]/g, "");
+  input.value = numbers;
+}
+/*
 function validateNumber(event) {
     var key = window.event ? event.keyCode : event.which;
     if (event.keyCode === 8 || event.keyCode === 46) {
@@ -334,7 +339,7 @@ function validateNumber(event) {
         return true;
     }
 }
-
+*/
 function currencyFormat(n, currency,decimal) {
     return currency + n.toFixed(decimal ).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 }
